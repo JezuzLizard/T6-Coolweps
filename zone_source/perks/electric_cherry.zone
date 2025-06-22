@@ -1,0 +1,44 @@
+fx,maps/zombie_alcatraz/fx_alcatraz_electric_cherry_trail
+fx,maps/zombie_alcatraz/fx_alcatraz_electric_cherry_down
+fx,maps/zombie_alcatraz/fx_alcatraz_electric_cherry_player
+fx,maps/zombie_alcatraz/fx_alcatraz_electric_cherry_sm
+fx,maps/zombie_alcatraz/fx_alcatraz_electric_cherry_lg
+fx,maps/zombie/fx_zombie_tesla_shock_ground
+image,fxt_env_lighting_bolt_air
+material,gfx_fxt_env_lightning_bolt_body
+material,gfx_fxt_light_flare2_eo15
+fx,maps/zombie/fx_zombie_tesla_shock
+fx,maps/zombie/fx_zombie_tesla_shock_secondary
+
+// Perk Bottle
+image,~-gmtl_t6_zmb_perk_bottle_cherry_col
+material,mc/mtl_t6_wpn_zmb_perk_bottle_cherry
+material,mc/mtl_t6_wpn_zmb_perk_bottle_cherry_alpha
+xmodel,t6_wpn_zmb_perk_bottle_cherry_view
+xmodel,t6_wpn_zmb_perk_bottle_cherry_world
+weapon,zombie_perk_bottle_cherry
+
+// Powered On Machine
+image,~~-gzombie_vending_electric_c~a9b68ef1
+image,zombie_vending_electric_cherry_n
+image,~-gzombie_vending_electric_cherry_c
+material,mc/mtl_p6_zm_vending_electric_cherry_off
+image,~~-gglass_frosted_panel_spc-r~568cfc3f
+image,~-gmtl_p6_zm_glass_frosted_cl~8b3b55a2
+material,mc/mtl_p6_zm_al_glass_frosted_clear_center
+image,~~-gglo_dec_blood_splat_drip_~b18384d6
+image,glo_dec_blood_splat_drip_run_medium_n
+image,~-gglo_dec_mature_blood_splt_~c028c2d0
+material,mc/zm_al_blood_drips_run_medium
+xmodel,p6_zm_vending_electric_cherry_off
+techniqueset,mc_sw4_3d_phong_emissive_q0751958
+image,zombie_vending_electric_cherry_m
+image,~~-gzombie_vending_electric_c~69de7fa3
+material,mc/mtl_p6_zm_vending_electric_cherry_on
+xmodel,p6_zm_vending_electric_cherry_on
+
+rawfile,vision/zm_electric_cherry.vision
+
+// 2d Icon
+image,minimap_icon_electric_cherry
+material,specialty_electric_cherry_zombie

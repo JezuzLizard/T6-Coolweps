@@ -1,0 +1,33 @@
+// Perk Bottle
+image,~-gmtl_t6_zmb_perk_bottle_whoswho_col
+material,mc/mtl_t6_wpn_zmb_perk_bottle_whoswho
+material,mc/mtl_t6_wpn_zmb_perk_bottle_whoswho_alpha
+xmodel,t6_wpn_zmb_perk_bottle_whoswho_view
+xmodel,t6_wpn_zmb_perk_bottle_whoswho_world
+weapon,zombie_perk_bottle_whoswho
+
+// Powered Off Machined
+image,~~-gzombie_vending_chug_a_bud~370fa9b9
+image,zombie_vending_chug_a_bud_machine_n
+image,~-gzombie_vending_chug_a_bud_machine_c
+material,mc/mtl_p6_zm_vending_chugabud
+image,~~-gmtl_p6_zm_chugabud_glass_~c7be6ba8
+image,~-gmtl_p6_zm_chugabud_glass_c
+material,mc/mtl_p6_zm_chugabud_glass
+xmodel,p6_zm_vending_chugabud
+
+// Powered On Machine
+image,zombie_vending_chug_a_bud_machine_m
+image,~~-gzombie_vending_chug_a_bud~24028e09
+material,mc/mtl_p6_zm_vending_chugabud_on
+xmodel,p6_zm_vending_chugabud_on
+
+// Script Assets
+image,fxt_env_dust_mote_pcloud_2
+material,gfx_fxt_env_dust_mote_pcloud_2_add
+fx,weapon/quantum_bomb/fx_player_position_effect
+rawfile,shock/whoswho.shock
+
+// 2d Icon
+image,minimap_icon_chugabud
+material,specialty_chugabud_zombies

@@ -1,0 +1,17 @@
+image,~~-gp6_zm_buildable_turbine_s~075125e1
+image,p6_zm_buildable_turbine_n
+image,~-gp6_zm_buildable_turbine_c
+material,mc/mtl_p6_zm_buildable_turbine
+xmodel,p6_anim_zm_buildable_turbine
+xanim,viewmodel_motion_sensor_fire
+xanim,viewmodel_motion_sensor_d2p_in
+xanim,viewmodel_motion_sensor_d2p_loop
+xanim,viewmodel_motion_sensor_d2p_out
+image,zm_turbine_icon
+material,turbine_zm_icon
+weapon,equip_turbine_zm
+weapon,equip_turbine_zm_turret
+xanim,o_zombie_buildable_turbine_fullpower
+xanim,o_zombie_buildable_turbine_halfpower
+xanim,o_zombie_buildable_turbine_neardeath
+xanim,o_zombie_buildable_turbine_death
