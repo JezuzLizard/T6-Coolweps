@@ -20,14 +20,21 @@ set MOD_NAME=zm_perks
 --load "%GAME_FOLDER%\zone\all\so_zsurvival_zm_transit.ff" ^
 --base-folder "%OAT_BASE%" ^
 --asset-search-path "%MOD_BASE%" ^
+--add-asset-search-path "%MOD_BASE%\mod_thundergun" ^
+--add-asset-search-path "%MOD_BASE%\mod_minigun_powerup" ^
+--add-asset-search-path "%MOD_BASE%\mod_perk_slot_powerup" ^
+--add-asset-search-path "%MOD_BASE%\mod_perks" ^
 --source-search-path "%MOD_BASE%\zone_source" ^
---output-folder "%MOD_BASE%\zone" mod
+--add-source-search-path "%MOD_BASE%\mod_thundergun\zone_source" ^
+--add-source-search-path "%MOD_BASE%\mod_minigun_powerup\zone_source" ^
+--add-source-search-path "%MOD_BASE%\mod_perk_slot_powerup\zone_source" ^
+--add-source-search-path "%MOD_BASE%\mod_perks\zone_source" ^
+--output-folder "%MOD_BASE%" mod
 
 if %ERRORLEVEL% NEQ 0 (
     COLOR C
     echo FAIL!
-) else (
-    XCOPY "%MOD_BASE%\zone\" "%LOCALAPPDATA%\Plutonium-staging\storage\t6\mods\%MOD_NAME%\" /Y
 )
+
 popd
 pause

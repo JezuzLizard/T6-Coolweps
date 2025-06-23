@@ -1,0 +1,3 @@
+xmodel,zombie_pickup_perk_bottle
+script,scripts/zm/perk_drop.csc
+script,scripts/zm/perk_drop.gsc

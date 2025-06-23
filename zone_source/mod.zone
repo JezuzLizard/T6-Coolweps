@@ -12,11 +12,14 @@ include,perks/speed
 include,perks/staminup
 include,perks/vulture
 include,perks/whoswho
-include,turret
-include,powerups/minigun
-include,powerups/perk
+include,perks/perks
 
-script,scripts/zm/minigun.csc
-script,scripts/zm/zm_prison/perks.csc
+include,powerups/minigun
+
+include,powerups/perk_drop
+
+include,weapons/thundergun
+
+include,turret
 script,scripts/zm/zm_buried/reduce_perk_clientfield.csc
-script,scripts/zm/perk_drop.csc
+script,scripts/zm/zm_buried/reduce_perk_clientfield.gsc
