@@ -1,17 +1,6 @@
 >game,T6
 >name,mod
 
-include,perks/deadshot
-include,perks/doubletap
-include,perks/electric_cherry
-include,perks/jugg
-include,perks/mule_kick
-include,perks/phd_flopper
-include,perks/revive
-include,perks/speed
-include,perks/staminup
-include,perks/vulture
-include,perks/whoswho
 include,perks/perks
 
 include,powerups/minigun

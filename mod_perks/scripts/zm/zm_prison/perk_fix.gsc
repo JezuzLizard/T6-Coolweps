@@ -4,12 +4,6 @@
 
 main()
 {
-	level.zombiemode_using_marathon_perk = 1;
-	level.zombiemode_using_additionalprimaryweapon_perk = 1;
-	
-	level.zombiemode_using_divetonuke_perk = 1;
-	maps\mp\zombies\_zm_perk_divetonuke::enable_divetonuke_perk_for_level();
-	
 	// wait for perks to be initialized
 	flag_wait( "initial_blackscreen_passed" );
 	

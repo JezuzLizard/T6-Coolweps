@@ -270,8 +270,15 @@ perks_from_the_sky()
 
 	for ( i = 0; i < level.nuked_perks.size; i++ )
 	{
-		nuked_perk_location = _get_random_remaining_location();
 		nuked_perk = _get_random_remaining_perk_machine();
+		if ( nuked_perk.has_dropped )
+		{
+			continue;
+		}
+
+		_initiate_perk_drop( i );
+		nuked_perk_location = _get_random_remaining_location();
+		
 		perk_trigger = _spawn_perk_machine_from_structs( nuked_perk, nuked_perk_location );
 		perk_machine = perk_trigger.machine;
 		perk_trigger.blocker_model = nuked_perk_location.blocker_model;
@@ -279,7 +286,6 @@ perks_from_the_sky()
 		move_perk( perk_machine, top_height, time, accel );
 		perk_trigger trigger_off();
 
-		_initiate_perk_drop( i );
 		bring_perk( perk_machine, perk_trigger );
 	}
 }
@@ -334,7 +340,7 @@ _register_perk_random_location( sky_struct )
 	new_perk_location_obj.has_been_used = false; // mutable
 	new_perk_location_obj.script_int = sky_struct.script_int; // const
 	new_perk_location_obj.blocker_model = getent( new_perk_location_obj.target, "targetname" ); // const
-	level.nuked_perk_drop_locations[ level.nuked_perk_drop_locations.size ] = new_perk_location_obj;
+	level.nuked_perk_drop_locations[ new_perk_location_obj.script_int ] = new_perk_location_obj;
 }
 
 _register_nuked_perk_drop_delay( round_min, round_max, time_min, time_max, early_drop_notify = undefined )
@@ -376,26 +382,23 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 {
 	if ( array_validate( forced_script_ints_array ) )
 	{
-		forced_script_ints_array = array_randomize( forced_script_ints_array );
-		for ( i = 0; i < level.nuked_perk_drop_locations.size; i++ )
+		forced_script_ints_array = array_randomize( getarraykeys( forced_script_ints_array ) );
+		for ( j = 0; j < forced_script_ints_array.size; j++ )
 		{
-			location = level.nuked_perk_drop_locations[ i ];
-
-			for ( j = 0; j < forced_script_ints_array.size; j++ )
+			location = level.nuked_perk_drop_locations[ forced_script_ints_array[ i ] ];
+			if ( !location.has_been_used )
 			{
-				if ( !location.has_been_used && location.script_int == forced_script_ints_array[ j ] )
-				{
-					location.has_been_used = true;
-					return location;
-				}
+				location.has_been_used = true;
+				return location;
 			}
 		}
 	}
 
-	locations = array_randomize( level.nuked_perk_drop_locations );
+	keys = array_randomize( getarraykeys( level.nuked_perk_drop_locations ) );
+	locations = level.nuked_perk_drop_locations;
 	for ( i = 0; i < locations.size; i++ )
 	{
-		location = locations[ i ];
+		location = locations[ keys[ i ] ];
 
 		if ( !location.has_been_used )
 		{
@@ -414,7 +417,7 @@ _get_random_remaining_perk_machine( forced_perk = undefined )
 	{
 		nuked_perk = level.nuked_perks[ forced_perk ];
 
-		if ( !nuked_perk.has_dropped && nuked_perk.script_noteworthy == forced_perk )
+		if ( !nuked_perk.has_dropped )
 		{
 			nuked_perk.has_dropped = true;
 			return nuked_perk;
@@ -437,6 +440,45 @@ _get_random_remaining_perk_machine( forced_perk = undefined )
 	return random_perks[ "specialty_quickrevive" ];
 }
 
+// self = packapunch use trigger
+_power_on_packapunch()
+{
+	self thread vending_weapon_upgrade();
+	if ( isdefined( level._custom_turn_packapunch_on ) )
+		level thread [[ level._custom_turn_packapunch_on ]]();
+	else
+		level thread turn_packapunch_on();
+	wait 0.05;
+	waittillframeend;
+	level notify( "Pack_A_Punch_on" );
+}
+
+// self = perk use trigger
+_power_on_perk()
+{
+	self thread vending_trigger_think();
+	self thread electric_perks_dialog();
+
+	if ( isdefined( level._custom_perks ) && isdefined( level._custom_perks[ self.script_noteworthy ] ) )
+	{
+		level thread [[ level._custom_perks[ self.script_noteworthy ].perk_machine_thread ]]();
+	}
+	else
+	{
+		machine = getent( self.target, "targetname" );
+		machine setmodel( level.nuked_perks[ self.script_noteworthy ].model );
+		machine vibrate( vectorscale( ( 0, -1, 0 ), 100.0 ), 0.3, 0.4, 3 );
+		machine playsound( "zmb_perks_power_on" );
+		machine thread perk_fx( level.nuked_perks[ self.script_noteworthy ].perk_fx );
+		machine thread play_loop_on_machine();
+	}
+
+	wait 0.05;
+	waittillframeend;
+	level notify( self.script_noteworthy + "_power_on" );
+	self set_power_on( 1 );
+}
+
 _power_on_dropped_machines()
 {
 	level endon( "end_game" );
@@ -453,34 +495,11 @@ _power_on_dropped_machines()
 
 		if ( perk_trigger.script_noteworthy == "specialty_weapupgrade" )
 		{
-			perk_trigger thread vending_weapon_upgrade();
-			if ( isdefined( level._custom_turn_packapunch_on ) )
-				level thread [[ level._custom_turn_packapunch_on ]]();
-			else
-				level thread turn_packapunch_on();
-			
+			perk_trigger thread _power_on_packapunch();
 			continue;
 		}
 
-		perk_trigger thread vending_trigger_think();
-		perk_trigger thread electric_perks_dialog();
-
-		if ( isdefined( level._custom_perks ) && isdefined( level._custom_perks[ perk_trigger.script_noteworthy ] ) )
-		{
-			level thread [[ level._custom_perks[ perk_trigger.script_noteworthy ].perk_machine_thread ]]();
-			continue;
-		}
-
-		machine = getent( perk_trigger.target, "targetname" );
-		machine setmodel( level.nuked_perks[ perk_trigger.script_noteworthy ].model );
-		machine vibrate( vectorscale( ( 0, -1, 0 ), 100.0 ), 0.3, 0.4, 3 );
-		machine playsound( "zmb_perks_power_on" );
-		machine thread perk_fx( level.nuked_perks[ perk_trigger.script_noteworthy ].perk_fx );
-		machine thread play_loop_on_machine();
-
-		perk_trigger set_power_on( 1 );
-
-		level notify( perk_trigger.script_noteworthy );
+		perk_trigger thread _power_on_perk();
 	}
 }
 
