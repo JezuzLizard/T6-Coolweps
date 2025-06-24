@@ -1,2 +1,3 @@
 script,scripts/zm/zm_prison/perks.csc
 script,scripts/zm/zm_prison/perks.gsc
+script,maps/mp/zm_nuked_perks.gsc
