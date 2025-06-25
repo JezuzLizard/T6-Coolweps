@@ -11,6 +11,7 @@ main()
 	level.zombiemode_using_additionalprimaryweapon_perk = 1;
 	level.zombiemode_using_deadshot_perk = 1;
 	
+	// is_gametype_active zclassic zgrief
 	
 	level.zombiemode_using_divetonuke_perk = 1;
 	maps\mp\zombies\_zm_perk_divetonuke::enable_divetonuke_perk_for_level();
@@ -18,17 +19,46 @@ main()
 	replacefunc( maps\mp\zombies\_zm_perk_divetonuke::init_divetonuke, ::noop );
 	
 	onfinalizeinitialization_callback( ::finalize_initialization );
+}
 
-	level._custom_perks[ "specialty_quickrevive" ] = spawnstruct();
-	level._custom_perks[ "specialty_fastreload" ] = spawnstruct();
-	level._custom_perks[ "specialty_rof" ] = spawnstruct();
-	level._custom_perks[ "specialty_armorvest" ] = spawnstruct();
-	level._custom_perks[ "specialty_weapupgrade" ] = spawnstruct();
-	level._custom_perks[ "specialty_additionalprimaryweapon" ] = spawnstruct();
-	level._custom_perks[ "specialty_deadshot" ] = spawnstruct();
-	level._custom_perks[ "specialty_longersprint" ] = spawnstruct();
-	//level._custom_perks[ "specialty_scavenger" ] = spawnstruct();
-	//level._custom_perks[ "specialty_finalstand" ] = spawnstruct();
+is_specialty_in_use( perk )
+{
+	switch (perk)
+	{
+		case "specialty_additionalprimaryweapon":
+			return is_true( level.zombiemode_using_additionalprimaryweapon_perk );
+		case "specialty_flakjacket":
+			if ( level.script == "zm_buried" )
+			{
+				return isdefined( level._custom_perks[ perk ] );
+			}
+
+			return is_true( level.zombiemode_using_divetonuke_perk ); // buried doesnt set this...
+		case "specialty_deadshot":
+			return is_true( level.zombiemode_using_deadshot_perk );
+		case "specialty_longersprint":
+			return is_true( level.zombiemode_using_marathon_perk );
+		case "specialty_rof":
+			return is_true( level.zombiemode_using_doubletap_perk );
+		case "specialty_armorvest":
+			return is_true( level.zombiemode_using_juggernaut_perk );
+		case "specialty_quickrevive":
+			return is_true( level.zombiemode_using_revive_perk );
+		case "specialty_fastreload":
+			return is_true( level.zombiemode_using_sleightofhand_perk );
+		case "specialty_scavenger":
+			return is_true( level.zombiemode_using_tombstone_perk );
+		case "specialty_weapupgrade":
+			return is_true( level.zombiemode_using_pack_a_punch );
+		case "specialty_finalstand":
+			return is_true( level.zombiemode_using_chugabud_perk );
+		case "specialty_stalker": // custom specialty for the fizz
+			return is_true( level.zombiemode_using_random_perk );
+		case "specialty_grenadepulldeath":
+			return is_true( level.zombiemode_using_electric_cherry_perk ); // csc doesnt use this...
+		default:
+			return isdefined( level._custom_perks[ perk ] ); // vulture aid doesnt have a bool at all!
+	}
 }
 
 finalize_initialization()
@@ -365,7 +395,7 @@ mod_vending_precache()
 			precachemodel( level.machine_assets[ keys[ i ] ].off_model );
 		}
 
-		if ( isdefined( precachemodel( level.machine_assets[ keys[ i ] ].on_model ) ) )
+		if ( isdefined( level.machine_assets[ keys[ i ] ].on_model ) )
 		{
 			precachemodel( level.machine_assets[ keys[ i ] ].on_model );
 		}

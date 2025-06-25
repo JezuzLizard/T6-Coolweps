@@ -71,7 +71,7 @@ is_temporary_zombie_weapon_minigun( weap )
 
 func_should_drop_minigun_tomb()
 {
-	if ( level.total_capture_zones == 6 )
+	if ( level.total_capture_zones > 0 )
 	{
 		level._tomb_minigun_drop = true;
 	}
@@ -85,10 +85,20 @@ func_should_drop_minigun_tomb()
 			return false;
 		}
 	}
-	
-	if ( is_true( level._tomb_minigun_drop ) )
+
+	if ( flag( "solo_game" ) )
 	{
-		return true;
+		if ( level.solo_lives_given > 0 )
+		{
+			return true;
+		}
+	}
+	else
+	{
+		if ( is_true( level._tomb_minigun_drop ) )
+		{
+			return true;
+		}
 	}
 	
 	return false;
@@ -105,13 +115,20 @@ func_should_drop_minigun_prison()
 			return false;
 		}
 	}
-	
-	if ( level.n_quest_iteration_count <= 1 )
+
+	if ( flag( "solo_game" ) )
 	{
-		return false;
+		return true;
+	}
+
+	m_door = getent( "powerup_door", "targetname" );
+	
+	if ( is_true( m_door.opened ) )
+	{
+		return true;
 	}
 	
-	return true;
+	return false;
 }
 
 minigun_powerup_grab_check( player )

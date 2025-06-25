@@ -25,12 +25,12 @@ init_nuked_perks()
 	_register_nuked_perk( "zombie_vending_three_gun", "specialty_additionalprimaryweapon", "additionalprimaryweapon_light" );
 	_register_nuked_perk( "p6_zm_al_vending_ads", "specialty_deadshot", "deadshot_light" );
 	_register_nuked_perk( "p6_zm_al_vending_nuke", "specialty_flakjacket", "divetonuke_light" );
-	//_register_nuked_perk( "p6_zm_vending_electric_cherry_off", "specialty_grenadepulldeath", "electriccherry" );
+	_register_nuked_perk( "p6_zm_vending_electric_cherry", "specialty_grenadepulldeath", "electriccherry" );
 	_register_nuked_perk( "zombie_vending_marathon", "specialty_longersprint", "marathon_light" );
-	//_register_nuked_perk( "zombie_vending_tombstone", "specialty_scavenger", "tombstone_light" );
-	//_register_nuked_perk( "p6_zm_vending_chugabud", "specialty_finalstand", "tombstone_light" );
-	//_register_nuked_perk( "p6_zm_vending_vultureaid", "specialty_nomotionsensor", "vulture_light" );
-	//_register_nuked_perk( "p6_zm_vending_diesel_magic", "specialty_stalker", "perk_machine_light" );
+	_register_nuked_perk( "zombie_vending_tombstone", "specialty_scavenger", "tombstone_light" );
+	_register_nuked_perk( "p6_zm_vending_chugabud", "specialty_finalstand", "tombstone_light" );
+	_register_nuked_perk( "p6_zm_vending_vultureaid", "specialty_nomotionsensor", "vulture_light" );
+	_register_nuked_perk( "p6_zm_vending_diesel_magic", "specialty_stalker", "perk_machine_light" );
 
 	_register_nuked_perk_drop_delay( 3, 5, 30, 60 );
 	_register_nuked_perk_drop_delay( 6, 9, 30, 60 );
@@ -333,7 +333,7 @@ _register_nuked_perk( model, script_noteworthy, perk_fx, position_scale = 1 )
 		level.nuked_perks = [];
 	}
 
-	if ( !isdefined( level._custom_perks[ script_noteworthy ] ) )
+	if ( !scripts\zm\perks::is_specialty_in_use( script_noteworthy ) )
 	{
 		return;
 	}

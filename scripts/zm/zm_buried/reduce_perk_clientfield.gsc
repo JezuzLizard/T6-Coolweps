@@ -11,12 +11,12 @@ perks_register_clientfield()
 {
 	if ( isdefined( level.zombiemode_using_additionalprimaryweapon_perk ) && level.zombiemode_using_additionalprimaryweapon_perk )
 	{
-		registerclientfield( "toplayer", "perk_additional_primary_weapon", 1, 2, "int" );
+		registerclientfield( "toplayer", "perk_additional_primary_weapon", 1, 1, "int" );
 	}
 	
 	if ( isdefined( level.zombiemode_using_deadshot_perk ) && level.zombiemode_using_deadshot_perk )
 	{
-		registerclientfield( "toplayer", "perk_dead_shot", 1, 2, "int" );
+		registerclientfield( "toplayer", "perk_dead_shot", 1, 1, "int" );
 	}
 	
 	if ( isdefined( level.zombiemode_using_doubletap_perk ) && level.zombiemode_using_doubletap_perk )
@@ -31,22 +31,22 @@ perks_register_clientfield()
 	
 	if ( isdefined( level.zombiemode_using_marathon_perk ) && level.zombiemode_using_marathon_perk )
 	{
-		registerclientfield( "toplayer", "perk_marathon", 1, 2, "int" );
+		registerclientfield( "toplayer", "perk_marathon", 1, 1, "int" );
 	}
 	
 	if ( isdefined( level.zombiemode_using_revive_perk ) && level.zombiemode_using_revive_perk )
 	{
-		registerclientfield( "toplayer", "perk_quick_revive", 1, 2, "int" );
+		registerclientfield( "toplayer", "perk_quick_revive", 1, 1, "int" );
 	}
 	
 	if ( isdefined( level.zombiemode_using_sleightofhand_perk ) && level.zombiemode_using_sleightofhand_perk )
 	{
-		registerclientfield( "toplayer", "perk_sleight_of_hand", 1, 2, "int" );
+		registerclientfield( "toplayer", "perk_sleight_of_hand", 1, 1, "int" );
 	}
 	
 	if ( isdefined( level.zombiemode_using_tombstone_perk ) && level.zombiemode_using_tombstone_perk )
 	{
-		registerclientfield( "toplayer", "perk_tombstone", 1, 2, "int" );
+		registerclientfield( "toplayer", "perk_tombstone", 1, 1, "int" );
 	}
 	
 	if ( isdefined( level.zombiemode_using_perk_intro_fx ) && level.zombiemode_using_perk_intro_fx )
