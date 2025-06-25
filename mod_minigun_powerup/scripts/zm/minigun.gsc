@@ -123,7 +123,7 @@ func_should_drop_minigun_prison()
 
 	m_door = getent( "powerup_door", "targetname" );
 	
-	if ( is_true( m_door.opened ) )
+	if ( is_true( m_door.opened ) || level.n_quest_iteration_count > 1 )
 	{
 		return true;
 	}
