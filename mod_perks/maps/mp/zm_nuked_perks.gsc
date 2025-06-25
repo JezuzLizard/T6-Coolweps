@@ -24,7 +24,7 @@ init_nuked_perks()
 	_register_nuked_perk( "p6_anim_zm_buildable_pap", "specialty_weapupgrade", "packapunch_fx" );
 	_register_nuked_perk( "zombie_vending_three_gun", "specialty_additionalprimaryweapon", "additionalprimaryweapon_light" );
 	//_register_nuked_perk( "zombie_perk_bottle_deadshot", "specialty_deadshot", "deadshot_light" );
-	_register_nuked_perk( "p6_zm_al_vending_nuke_on", "specialty_flakjacket", "divetonuke_light" );
+	_register_nuked_perk( "p6_zm_al_vending_nuke", "specialty_flakjacket", "divetonuke_light" );
 	//_register_nuked_perk( "p6_zm_vending_electric_cherry_off", "specialty_grenadepulldeath", "electriccherry" );
 	_register_nuked_perk( "zombie_vending_marathon", "specialty_longersprint", "marathon_light" );
 	//_register_nuked_perk( "zombie_vending_tombstone", "specialty_scavenger", "tombstone_light" );
@@ -64,10 +64,7 @@ init_nuked_perks()
 
 	level.machine_assets = [];
 
-	if ( !isdefined( level.custom_vending_precaching ) )
-		level.custom_vending_precaching = maps\mp\zombies\_zm_perks::default_vending_precaching;
-
-	[[ level.custom_vending_precaching ]]();
+	scripts\zm\perks::mod_vending_precache();
 
 	if ( !isdefined( level.packapunch_timeout ) )
 		level.packapunch_timeout = 15;
@@ -270,14 +267,19 @@ perks_from_the_sky()
 
 	for ( i = 0; i < level.nuked_perks.size; i++ )
 	{
-		nuked_perk = _get_random_remaining_perk_machine();
-		if ( nuked_perk.has_dropped )
+		nuked_perk_location = _get_random_remaining_location();
+		if ( !isdefined( nuked_perk_location ) )
 		{
-			continue;
+			break;
+		}
+
+		nuked_perk = _get_random_remaining_perk_machine();
+		if ( !isdefined( nuked_perk ) )
+		{
+			break;
 		}
 
 		_initiate_perk_drop( i );
-		nuked_perk_location = _get_random_remaining_location();
 		
 		perk_trigger = _spawn_perk_machine_from_structs( nuked_perk, nuked_perk_location );
 		perk_machine = perk_trigger.machine;
@@ -317,6 +319,11 @@ _register_nuked_perk( model, script_noteworthy, perk_fx, position_scale = 1 )
 	if ( !isdefined( level.nuked_perks ) )
 	{
 		level.nuked_perks = [];
+	}
+
+	if ( !isdefined( level._custom_perks[ script_noteworthy ] ) )
+	{
+		return;
 	}
 
 	new_nuked_perk_obj = spawnstruct();
@@ -382,10 +389,10 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 {
 	if ( array_validate( forced_script_ints_array ) )
 	{
-		forced_script_ints_array = array_randomize( getarraykeys( forced_script_ints_array ) );
-		for ( j = 0; j < forced_script_ints_array.size; j++ )
+		forced_script_ints_array_keys = array_randomize( getarraykeys( forced_script_ints_array ) );
+		for ( j = 0; j < forced_script_ints_array_keys.size; j++ )
 		{
-			location = level.nuked_perk_drop_locations[ forced_script_ints_array[ i ] ];
+			location = level.nuked_perk_drop_locations[ forced_script_ints_array[ forced_script_ints_array_keys[ j ] ] ];
 			if ( !location.has_been_used )
 			{
 				location.has_been_used = true;
@@ -394,8 +401,19 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 		}
 	}
 
-	keys = array_randomize( getarraykeys( level.nuked_perk_drop_locations ) );
+	spots_used = 0;
 	locations = level.nuked_perk_drop_locations;
+	keys = array_randomize( getarraykeys( level.nuked_perk_drop_locations ) );
+	for ( i = 0; i < locations.size; i++ )
+	{
+		location = locations[ keys[ i ] ];
+
+		if ( location.has_been_used )
+		{
+			spots_used++;
+		}
+	}
+	
 	for ( i = 0; i < locations.size; i++ )
 	{
 		location = locations[ keys[ i ] ];
@@ -403,12 +421,17 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 		if ( !location.has_been_used )
 		{
 			location.has_been_used = true;
+
+			if ( spots_used >= locations.size - 1 )
+			{
+				location.is_last = true;
+			}
+			
 			return location;
 		}
 	}
 
-	// failsafe, just in case
-	return locations[ 0 ];
+	return undefined;
 }
 
 _get_random_remaining_perk_machine( forced_perk = undefined )
@@ -436,8 +459,7 @@ _get_random_remaining_perk_machine( forced_perk = undefined )
 		}
 	}
 
-	// failsafe
-	return random_perks[ "specialty_quickrevive" ];
+	return undefined;
 }
 
 // self = packapunch use trigger

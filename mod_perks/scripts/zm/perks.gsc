@@ -17,6 +17,17 @@ main()
 	replacefunc( maps\mp\zombies\_zm_perk_divetonuke::init_divetonuke, ::noop );
 	
 	onfinalizeinitialization_callback( ::finalize_initialization );
+
+	level._custom_perks[ "specialty_quickrevive" ] = spawnstruct();
+	level._custom_perks[ "specialty_fastreload" ] = spawnstruct();
+	level._custom_perks[ "specialty_rof" ] = spawnstruct();
+	level._custom_perks[ "specialty_armorvest" ] = spawnstruct();
+	level._custom_perks[ "specialty_weapupgrade" ] = spawnstruct();
+	level._custom_perks[ "specialty_additionalprimaryweapon" ] = spawnstruct();
+	level._custom_perks[ "specialty_deadshot" ] = spawnstruct();
+	level._custom_perks[ "specialty_longersprint" ] = spawnstruct();
+	level._custom_perks[ "specialty_scavenger" ] = spawnstruct();
+	level._custom_perks[ "specialty_finalstand" ] = spawnstruct();
 }
 
 finalize_initialization()
@@ -319,6 +330,19 @@ mod_vending_precache()
 		level.machine_assets["whoswho"].on_model = "p6_zm_vending_chugabud_on";
 	}
 
+	if ( level._custom_perks.size > 0 )
+	{
+		a_keys = getarraykeys( level._custom_perks );
+		
+		for ( i = 0; i < a_keys.size; i++ )
+		{
+			if ( isdefined( level._custom_perks[a_keys[i]].precache_func ) )
+			{
+				level [[ level._custom_perks[a_keys[i]].precache_func ]]();
+			}
+		}
+	}
+
 	keys = getarraykeys( level.machine_assets );
 	for ( i = 0; i < keys.size; i++ )
 	{
@@ -348,19 +372,6 @@ mod_vending_precache()
 		if ( isdefined( level.machine_assets[ keys[ i ] ].weapon ) )
 		{
 			precacheitem( level.machine_assets[ keys[ i ] ].weapon );
-		}
-	}
-	
-	if ( level._custom_perks.size > 0 )
-	{
-		a_keys = getarraykeys( level._custom_perks );
-		
-		for ( i = 0; i < a_keys.size; i++ )
-		{
-			if ( isdefined( level._custom_perks[a_keys[i]].precache_func ) )
-			{
-				level [[ level._custom_perks[a_keys[i]].precache_func ]]();
-			}
 		}
 	}
 }
