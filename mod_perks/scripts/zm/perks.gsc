@@ -24,10 +24,10 @@ main()
 	level._custom_perks[ "specialty_armorvest" ] = spawnstruct();
 	level._custom_perks[ "specialty_weapupgrade" ] = spawnstruct();
 	level._custom_perks[ "specialty_additionalprimaryweapon" ] = spawnstruct();
-	level._custom_perks[ "specialty_deadshot" ] = spawnstruct();
+	//level._custom_perks[ "specialty_deadshot" ] = spawnstruct();
 	level._custom_perks[ "specialty_longersprint" ] = spawnstruct();
-	level._custom_perks[ "specialty_scavenger" ] = spawnstruct();
-	level._custom_perks[ "specialty_finalstand" ] = spawnstruct();
+	//level._custom_perks[ "specialty_scavenger" ] = spawnstruct();
+	//level._custom_perks[ "specialty_finalstand" ] = spawnstruct();
 }
 
 finalize_initialization()

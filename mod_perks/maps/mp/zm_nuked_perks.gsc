@@ -68,14 +68,20 @@ init_nuked_perks()
 
 	if ( !isdefined( level.packapunch_timeout ) )
 		level.packapunch_timeout = 15;
-	
-	set_zombie_var( "zombie_perk_cost", 2000 );
-	set_zombie_var( "zombie_perk_juggernaut_health", 160 );
-	set_zombie_var( "zombie_perk_juggernaut_health_upgrade", 190 );
 
 	level thread perk_hostmigration();
 
 	level thread _power_on_dropped_machines();
+
+	level thread start_zmb_vars();
+}
+
+start_zmb_vars()
+{
+	waittillframeend;
+	set_zombie_var( "zombie_perk_cost", 2000 );
+	set_zombie_var( "zombie_perk_juggernaut_health", 160 );
+	set_zombie_var( "zombie_perk_juggernaut_health_upgrade", 190 );
 }
 
 draw_debug_location()
@@ -382,7 +388,7 @@ _initiate_perk_drop( delay_index )
 	time_min = level.nuked_perk_drop_delays[ delay_index ].time_min;
 	time_max = level.nuked_perk_drop_delays[ delay_index ].time_max;
 	wait_for_round_range( round_min, round_max );
-	wait( randomintrange( time_min, time_max ) );
+	// wait( randomintrange( time_min, time_max ) );
 }
 
 _get_random_remaining_location( forced_script_ints_array = undefined )
@@ -481,19 +487,12 @@ _power_on_perk()
 	self thread vending_trigger_think();
 	self thread electric_perks_dialog();
 
-	if ( isdefined( level._custom_perks ) && isdefined( level._custom_perks[ self.script_noteworthy ] ) )
-	{
-		level thread [[ level._custom_perks[ self.script_noteworthy ].perk_machine_thread ]]();
-	}
-	else
-	{
-		machine = getent( self.target, "targetname" );
-		machine setmodel( level.nuked_perks[ self.script_noteworthy ].model );
-		machine vibrate( vectorscale( ( 0, -1, 0 ), 100.0 ), 0.3, 0.4, 3 );
-		machine playsound( "zmb_perks_power_on" );
-		machine thread perk_fx( level.nuked_perks[ self.script_noteworthy ].perk_fx );
-		machine thread play_loop_on_machine();
-	}
+	machine = getent( self.target, "targetname" );
+	machine setmodel( level.nuked_perks[ self.script_noteworthy ].model + "_on" );
+	machine vibrate( vectorscale( ( 0, -1, 0 ), 100.0 ), 0.3, 0.4, 3 );
+	machine playsound( "zmb_perks_power_on" );
+	machine thread perk_fx( level.nuked_perks[ self.script_noteworthy ].perk_fx );
+	machine thread play_loop_on_machine();
 
 	wait 0.05;
 	waittillframeend;
