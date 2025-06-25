@@ -26,7 +26,7 @@ perks_register_clientfield()
 	
 	if ( is_true( level.zombiemode_using_juggernaut_perk ) )
 	{
-		registerclientfield( "toplayer", "perk_juggernaut", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1 );
+		registerclientfield( "toplayer", "perk_juggernaut", 1, 1, "int", level.zombies_global_perk_client_callback, 0, 1 );
 	}
 	
 	if ( is_true( level.zombiemode_using_marathon_perk ) )

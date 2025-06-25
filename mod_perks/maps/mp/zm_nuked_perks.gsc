@@ -23,7 +23,7 @@ init_nuked_perks()
 	_register_nuked_perk( "zombie_vending_jugg", "specialty_armorvest", "jugger_light", 10 );
 	_register_nuked_perk( "p6_anim_zm_buildable_pap", "specialty_weapupgrade", "packapunch_fx" );
 	_register_nuked_perk( "zombie_vending_three_gun", "specialty_additionalprimaryweapon", "additionalprimaryweapon_light" );
-	//_register_nuked_perk( "zombie_perk_bottle_deadshot", "specialty_deadshot", "deadshot_light" );
+	_register_nuked_perk( "zombie_perk_bottle_deadshot", "specialty_deadshot", "deadshot_light" );
 	_register_nuked_perk( "p6_zm_al_vending_nuke", "specialty_flakjacket", "divetonuke_light" );
 	//_register_nuked_perk( "p6_zm_vending_electric_cherry_off", "specialty_grenadepulldeath", "electriccherry" );
 	_register_nuked_perk( "zombie_vending_marathon", "specialty_longersprint", "marathon_light" );
@@ -39,19 +39,19 @@ init_nuked_perks()
 	_register_nuked_perk_drop_delay( 15, 19, 60, 120 );
 	_register_nuked_perk_drop_delay( 20, 25, 60, 120 );
 
-	_register_nuked_perk_drop_delay( 26, 31, 90, 180 );
-	_register_nuked_perk_drop_delay( 32, 38, 90, 180 );
-	_register_nuked_perk_drop_delay( 39, 45, 90, 180 );
+	_register_nuked_perk_drop_delay( 26, 27, 90, 180 );
+	_register_nuked_perk_drop_delay( 28, 29, 90, 180 );
+	_register_nuked_perk_drop_delay( 30, 31, 90, 180 );
 
-	_register_nuked_perk_drop_delay( 46, 53, 120, 240 );
-	_register_nuked_perk_drop_delay( 54, 61, 120, 240 );
-	_register_nuked_perk_drop_delay( 62, 70, 120, 240 );
+	_register_nuked_perk_drop_delay( 32, 33, 120, 240 );
+	_register_nuked_perk_drop_delay( 34, 35, 120, 240 );
+	_register_nuked_perk_drop_delay( 36, 37, 120, 240 );
 
-	_register_nuked_perk_drop_delay( 71, 79, 150, 300 );
-	_register_nuked_perk_drop_delay( 80, 89, 150, 300 );
-	_register_nuked_perk_drop_delay( 90, 99, 150, 300 );
+	_register_nuked_perk_drop_delay( 38, 39, 150, 300 );
+	_register_nuked_perk_drop_delay( 40, 41, 150, 300 );
+	_register_nuked_perk_drop_delay( 42, 43, 150, 300 );
 
-	_register_nuked_perk_drop_delay( 100, 110, 180, 360 );
+	_register_nuked_perk_drop_delay( 44, 45, 180, 360 );
 
 	initialize_custom_perk_arrays();
 
@@ -132,6 +132,12 @@ bring_perk( machine, trigger )
 		}
 		else
 		{
+			if ( isdefined( trigger.blocker_model.clip ) )
+			{
+				trigger.blocker_model.clip delete();
+				trigger.blocker_model.clip = undefined;
+			}
+
 			trigger.blocker_model delete();
 		}
 	}
@@ -353,6 +359,12 @@ _register_perk_random_location( sky_struct )
 	new_perk_location_obj.has_been_used = false; // mutable
 	new_perk_location_obj.script_int = sky_struct.script_int; // const
 	new_perk_location_obj.blocker_model = getent( new_perk_location_obj.target, "targetname" ); // const
+
+	if ( new_perk_location_obj.script_int > 10 )
+	{
+		new_perk_location_obj.blocker_model.clip = spawn_blocker_collision( new_perk_location_obj.origin, new_perk_location_obj.angles );
+	}
+
 	level.nuked_perk_drop_locations[ new_perk_location_obj.script_int ] = new_perk_location_obj;
 }
 
@@ -388,7 +400,7 @@ _initiate_perk_drop( delay_index )
 	time_min = level.nuked_perk_drop_delays[ delay_index ].time_min;
 	time_max = level.nuked_perk_drop_delays[ delay_index ].time_max;
 	wait_for_round_range( round_min, round_max );
-	// wait( randomintrange( time_min, time_max ) );
+	wait( randomintrange( time_min, time_max ) );
 }
 
 _get_random_remaining_location( forced_script_ints_array = undefined )
@@ -746,4 +758,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 		[[ level._custom_perks[ specialty_perk ].perk_machine_set_kvps ]]( use_trigger, perk_machine, bump_trigger, collision );
 
 	return use_trigger;
+}
+
+spawn_blocker_collision( origin, angles )
+{
+	blocker = spawn( "script_model", origin, 1 );
+	blocker.angles = angles;
+	blocker setmodel( "zm_collision_perks1" );
+	blocker.script_noteworthy = "clip";
+	blocker disconnectpaths();
+	return blocker;
 }

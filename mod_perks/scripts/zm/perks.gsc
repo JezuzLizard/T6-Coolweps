@@ -9,6 +9,7 @@ main()
 	
 	level.zombiemode_using_marathon_perk = 1;
 	level.zombiemode_using_additionalprimaryweapon_perk = 1;
+	level.zombiemode_using_deadshot_perk = 1;
 	
 	
 	level.zombiemode_using_divetonuke_perk = 1;
@@ -24,7 +25,7 @@ main()
 	level._custom_perks[ "specialty_armorvest" ] = spawnstruct();
 	level._custom_perks[ "specialty_weapupgrade" ] = spawnstruct();
 	level._custom_perks[ "specialty_additionalprimaryweapon" ] = spawnstruct();
-	//level._custom_perks[ "specialty_deadshot" ] = spawnstruct();
+	level._custom_perks[ "specialty_deadshot" ] = spawnstruct();
 	level._custom_perks[ "specialty_longersprint" ] = spawnstruct();
 	//level._custom_perks[ "specialty_scavenger" ] = spawnstruct();
 	//level._custom_perks[ "specialty_finalstand" ] = spawnstruct();
