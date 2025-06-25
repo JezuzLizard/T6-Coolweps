@@ -22,6 +22,7 @@ image,zombie_vending_ads_logo_n
 image,~-gp6_zm_al_vending_ads_logo_c
 material,mc/mtl_p6_zm_al_vending_ads_logo_on
 xmodel,p6_zm_al_vending_ads_on
+xmodel,p6_zm_al_vending_ads
 
 // 2d Icon
 image,specialty_ads_zombies

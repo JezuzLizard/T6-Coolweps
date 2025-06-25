@@ -161,14 +161,14 @@ mod_vending_precache()
 		{
 			level._effect["deadshot_light"] = loadfx( "maps/zombie_alcatraz/fx_alcatraz_perk_smk" );
 			level.machine_assets["deadshot"].off_model = "p6_zm_al_vending_ads_on";
-			level.machine_assets["deadshot"].on_model = "p6_zm_al_vending_ads_on";
 		}
 		else
 		{
 			level._effect["deadshot_light"] = loadfx( "misc/fx_zombie_cola_dtap_on" );
-			level.machine_assets["deadshot"].off_model = "zombie_vending_ads";
-			level.machine_assets["deadshot"].on_model = "zombie_vending_ads_on";
+			level.machine_assets["deadshot"].off_model = "p6_zm_al_vending_ads";
 		}
+
+		level.machine_assets["deadshot"].on_model = "p6_zm_al_vending_ads_on";
 	}
 	
 	if ( is_true( level.zombiemode_using_doubletap_perk ) )

@@ -23,7 +23,7 @@ init_nuked_perks()
 	_register_nuked_perk( "zombie_vending_jugg", "specialty_armorvest", "jugger_light", 10 );
 	_register_nuked_perk( "p6_anim_zm_buildable_pap", "specialty_weapupgrade", "packapunch_fx" );
 	_register_nuked_perk( "zombie_vending_three_gun", "specialty_additionalprimaryweapon", "additionalprimaryweapon_light" );
-	_register_nuked_perk( "zombie_perk_bottle_deadshot", "specialty_deadshot", "deadshot_light" );
+	_register_nuked_perk( "p6_zm_al_vending_ads", "specialty_deadshot", "deadshot_light" );
 	_register_nuked_perk( "p6_zm_al_vending_nuke", "specialty_flakjacket", "divetonuke_light" );
 	//_register_nuked_perk( "p6_zm_vending_electric_cherry_off", "specialty_grenadepulldeath", "electriccherry" );
 	_register_nuked_perk( "zombie_vending_marathon", "specialty_longersprint", "marathon_light" );
@@ -734,7 +734,7 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.script_label = "mus_perks_deadshot_sting";
 			use_trigger.target = "vending_deadshot";
 			perk_machine.script_string = "deadshot_vending";
-			perk_machine.targetname = "vending_deadshot_model";
+			perk_machine.targetname = "vending_deadshot";
 
 			if ( isdefined( bump_trigger ) )
 				bump_trigger.script_string = "deadshot_vending";

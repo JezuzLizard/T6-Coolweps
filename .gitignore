@@ -15,5 +15,8 @@ zmStats
 *.sabl
 *.sabs
 .vscode
+*.7z
+zone_dump/
+scriptdata/
 partclassification.csv
 partclassification_mp.csv

@@ -31,6 +31,7 @@ image,glo_dec_blood_splat_drip_run_medium_n
 image,~-gglo_dec_mature_blood_splt_~c028c2d0
 material,mc/zm_al_blood_drips_run_medium
 xmodel,p6_zm_vending_electric_cherry_off
+xmodel,p6_zm_vending_electric_cherry
 techniqueset,mc_sw4_3d_phong_emissive_q0751958
 image,zombie_vending_electric_cherry_m
 image,~~-gzombie_vending_electric_c~69de7fa3
