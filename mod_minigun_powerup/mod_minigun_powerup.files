@@ -1,2 +1,4 @@
 weapons/**
 ui_mp/t6/zombie/ammoareazombieog.lua
+**/*.gsc
+**/*.csc

@@ -38,7 +38,6 @@ def main():
 	output_zip = sys.argv[2]
 	developer = len(sys.argv) > 3 and sys.argv[3] != '0' and sys.argv[3] != 'false' and sys.argv[3] != 'False'
 
-	print(developer)
 	files_to_zip = []
 
 	files_files = find_files_files(search_root)

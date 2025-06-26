@@ -2,3 +2,5 @@ weapons/**
 fx/**
 xanim/**
 images/**
+**/*.gsc
+**/*.csc
