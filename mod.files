@@ -1,6 +1,7 @@
 !mod_*/
 !zone_dump/
 !scriptdata/
+!tools/
 
 **/*.gsc
 **/*.csc
