@@ -3,6 +3,7 @@ import zipfile
 import glob
 import sys
 import shutil
+from pathlib import Path
 
 def read_file_list(file_path):
 	includes = []
@@ -45,12 +46,13 @@ def read_file_list(file_path):
 
 	return filtered_files
 
-def find_files_files(root_dir):
+def find_files_files(root_dir, dev):
 	files_files = []
 	for dirpath, _, filenames in os.walk(root_dir):
 		for filename in filenames:
 			if filename.endswith('.files'):
-				files_files.append(os.path.join(dirpath, filename))
+				if not dev or Path(root_dir).resolve() != Path(dirpath).resolve():
+					files_files.append(os.path.join(dirpath, filename))
 				
 	return files_files
 
@@ -65,7 +67,7 @@ def main():
 
 	files_to_zip = []
 
-	files_files = find_files_files(search_root)
+	files_files = find_files_files(search_root, developer)
 	for files_file in files_files:
 		base_folder = os.path.dirname(files_file)
 		file_list = read_file_list(files_file)
