@@ -30,11 +30,32 @@ set MOD_NAME=zm_perks
 --add-source-search-path "%MOD_BASE%\mod_perk_slot_powerup\zone_source" ^
 --add-source-search-path "%MOD_BASE%\mod_perks\zone_source" ^
 --output-folder "%MOD_BASE%" mod
-
 if %ERRORLEVEL% NEQ 0 (
     COLOR C
     echo FAIL!
+		popd
+		pause
+		exit 1
+)
+
+python tools/generate_iwd.py . mod.zip
+if %ERRORLEVEL% NEQ 0 (
+    COLOR C
+    echo FAIL!
+		popd
+		pause
+		exit 2
+)
+
+mv mod.zip mod.iwd
+if %ERRORLEVEL% NEQ 0 (
+    COLOR C
+    echo FAIL!
+		popd
+		pause
+		exit 3
 )
 
 popd
 pause
+exit 0
