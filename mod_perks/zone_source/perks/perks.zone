@@ -13,3 +13,4 @@ include,perks/tombstone
 include,perks/wunderfizz
 
 script,scripts/zm/perks.csc
+localize,perks

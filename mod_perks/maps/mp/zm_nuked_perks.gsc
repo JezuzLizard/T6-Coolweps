@@ -291,7 +291,10 @@ perks_from_the_sky()
 			break;
 		}
 
-		_initiate_perk_drop( i );
+		if ( !getdvarint( "zm_nuked_test" ) )
+		{
+			_initiate_perk_drop( i );
+		}
 		
 		perk_trigger = _spawn_perk_machine_from_structs( nuked_perk, nuked_perk_location );
 		perk_machine = perk_trigger.machine;
@@ -768,6 +771,12 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 
 	if ( isdefined( level._custom_perks[ specialty_perk ] ) && isdefined( level._custom_perks[ specialty_perk ].perk_machine_set_kvps ) )
 		[[ level._custom_perks[ specialty_perk ].perk_machine_set_kvps ]]( use_trigger, perk_machine, bump_trigger, collision );
+
+	if ( specialty_perk == "specialty_grenadepulldeath" )
+	{
+			use_trigger.target = "vending_cherry";
+			perk_machine.targetname = "vending_cherry";
+	}
 
 	return use_trigger;
 }
