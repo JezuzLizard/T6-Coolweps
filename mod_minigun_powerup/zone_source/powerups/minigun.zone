@@ -74,5 +74,4 @@ xmodel,zombie_pickup_minigun
 soundbank,minigun.all
 soundbank,minigun.english
 script,scripts/zm/minigun.csc
-script,scripts/zm/minigun.gsc
 rawfile,ui_mp/t6/zombie/ammoareazombie.lua

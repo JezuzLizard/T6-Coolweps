@@ -11,4 +11,3 @@ include,weapons/thundergun
 
 include,turret
 script,scripts/zm/zm_buried/reduce_perk_clientfield.csc
-script,scripts/zm/zm_buried/reduce_perk_clientfield.gsc

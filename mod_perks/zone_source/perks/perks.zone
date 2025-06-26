@@ -12,10 +12,4 @@ include,perks/whoswho
 include,perks/tombstone
 include,perks/wunderfizz
 
-script,maps/mp/zm_nuked_perks.gsc
-script,scripts/zm/zm_nuked/perk_fix.gsc
-
-script,scripts/zm/zm_prison/perk_fix.gsc
-
-script,scripts/zm/perks.gsc
 script,scripts/zm/perks.csc
