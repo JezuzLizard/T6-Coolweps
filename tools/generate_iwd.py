@@ -2,6 +2,7 @@ import os
 import zipfile
 import glob
 import sys
+import shutil
 
 def read_file_list(file_path):
 	files = []
@@ -30,12 +31,14 @@ def find_files_files(root_dir):
 
 def main():
 	if len(sys.argv) < 3:
-		print("Usage: python generate_iwd.py <search_root> <output.zip>")
+		print("Usage: python generate_iwd.py <search_root> <output.iwd> [developer]")
 		sys.exit(1)
 
 	search_root = sys.argv[1]
 	output_zip = sys.argv[2]
+	developer = len(sys.argv) > 3 and sys.argv[3] != '0' and sys.argv[3] != 'false' and sys.argv[3] != 'False'
 
+	print(developer)
 	files_to_zip = []
 
 	files_files = find_files_files(search_root)
@@ -52,9 +55,15 @@ def main():
 			else:
 				print(f"Warning: {f} not found, skipping.")
 
-	with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+	if not developer:
+		with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+			for file_path, arcname in files_to_zip:
+				zipf.write(file_path, arcname=arcname)
+	else:
 		for file_path, arcname in files_to_zip:
-			zipf.write(file_path, arcname=arcname)
+			dest_path = os.path.join(search_root, arcname)
+			os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+			shutil.copy2(file_path, dest_path)
 
 	print(f"Created {output_zip} with {len(files_to_zip)} entries.")
 

@@ -38,22 +38,13 @@ if %ERRORLEVEL% NEQ 0 (
 		exit 1
 )
 
-python tools/generate_iwd.py . mod.zip
+python tools/generate_iwd.py . mod.iwd
 if %ERRORLEVEL% NEQ 0 (
     COLOR C
     echo FAIL!
 		popd
 		pause
 		exit 2
-)
-
-mv mod.zip mod.iwd
-if %ERRORLEVEL% NEQ 0 (
-    COLOR C
-    echo FAIL!
-		popd
-		pause
-		exit 3
 )
 
 popd
