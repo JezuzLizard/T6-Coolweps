@@ -19,7 +19,6 @@ def read_file_list(file_path):
 			else:
 				includes.append(line)
 
-	# Expand includes
 	files = []
 	for pattern in includes:
 		matched = glob.glob(os.path.join(os.path.dirname(file_path), pattern), recursive=True)
@@ -28,17 +27,14 @@ def read_file_list(file_path):
 		else:
 			files.append(os.path.join(os.path.dirname(file_path), pattern))
 
-	# Expand excludes
 	exclude_paths = set()
 	for pattern in excludes:
 		matched = glob.glob(os.path.join(os.path.dirname(file_path), pattern), recursive=True)
 		exclude_paths.update(os.path.abspath(p) for p in matched)
 
-	# Filter out excluded files and directories
 	filtered_files = []
 	for f in files:
 		abs_f = os.path.abspath(f)
-		# Exclude if file or any parent is in exclude_paths
 		if any(abs_f == ex or abs_f.startswith(ex + os.sep) for ex in exclude_paths):
 			continue
 
@@ -51,19 +47,19 @@ def find_files_files(root_dir, dev):
 	for dirpath, _, filenames in os.walk(root_dir):
 		for filename in filenames:
 			if filename.endswith('.files'):
-				if not dev or Path(root_dir).resolve() != Path(dirpath).resolve():
+				if dev == 0 or Path(root_dir).resolve() != Path(dirpath).resolve():
 					files_files.append(os.path.join(dirpath, filename))
 				
 	return files_files
 
 def main():
 	if len(sys.argv) < 3:
-		print("Usage: python generate_iwd.py <search_root> <output.iwd> [developer]")
+		print('Usage: python generate_iwd.py <search_root> <output.iwd> [developer]')
 		sys.exit(1)
 
 	search_root = sys.argv[1]
 	output_zip = sys.argv[2]
-	developer = len(sys.argv) > 3 and sys.argv[3] != '0' and sys.argv[3] != 'false' and sys.argv[3] != 'False'
+	developer = int(sys.argv[3]) if len(sys.argv) > 3 else 0
 
 	files_to_zip = []
 
@@ -79,19 +75,34 @@ def main():
 				arcname = os.path.relpath(f, base_folder)
 				files_to_zip.append((f, arcname))
 			else:
-				print(f"Warning: {f} not found, skipping.")
+				print(f'Warning: {f} not found, skipping.')
 
-	if not developer:
+	if developer == 0:
 		with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
 			for file_path, arcname in files_to_zip:
 				zipf.write(file_path, arcname=arcname)
+
+		print(f'Created {output_zip} with {len(files_to_zip)} entries.')
 	else:
+		remove_count = 0
 		for file_path, arcname in files_to_zip:
 			dest_path = os.path.join(search_root, arcname)
-			os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-			shutil.copy2(file_path, dest_path)
 
-	print(f"Created {output_zip} with {len(files_to_zip)} entries.")
+			if developer == 2:
+				if os.path.exists(dest_path):
+					os.remove(dest_path)
+					remove_count += 1
+			else:
+				if os.path.exists(output_zip):
+					os.remove(output_zip)
+
+				os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+				shutil.copy2(file_path, dest_path)
+
+		if developer == 2:
+			print(f'Disabled dev with {remove_count} entries.')
+		else:
+			print(f'Enabled dev with {len(files_to_zip)} entries.')
 
 if __name__ == "__main__":
 	main()
