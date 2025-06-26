@@ -812,6 +812,7 @@ zm_crawler_crawlerhold_walk_hunched_turn_180 : restart notify crawler_turn_180_a
 	ai_zombie_crawler_crawlerhold_walk_hunched_turn_180
 }
 
+// BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {
 	ai_zombie_thundergun_hit_faceplant
@@ -860,3 +861,4 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 {
 	ai_zombie_thundergun_getup_quick_a
 }
+// END THUNDERGUN

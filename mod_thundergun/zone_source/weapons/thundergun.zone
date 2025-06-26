@@ -55,17 +55,6 @@ material,mc/mtl_t5_camo_zmb_packapunch
 xmodel,t5_wpn_zmb_thundergun_view
 xmodel,t5_wpn_zmb_thundergun_world
 
-// Rumbles
-rawfile,rumble/subwoofer_heavy
-rawfile,rumble/tank_damage_heavy_h.rmb
-rawfile,rumble/tank_damage_heavy_l.rmb
-rawfile,rumble/damage_heavy
-rawfile,rumble/damage_heavy_h.rmb
-rawfile,rumble/damage_heavy_l.rmb
-rawfile,rumble/heavygun_fire
-rawfile,rumble/heavygun_fire_h.rmb
-rawfile,rumble/heavygun_fire_l.rmb
-
 // Flamethrower reticle
 image,hud_flamethrower_reticle
 material,hud_flamethrower_reticle
@@ -121,35 +110,6 @@ rawfile,animtrees/zm_tomb_basic.atr
 rawfile,animtrees/zm_transit_basic.atr
 
 // Scripts
-script,aitype/clientscripts/zm_alcatraz_basic.csc
-script,aitype/clientscripts/zm_buried_basic_01_char_01.csc
-script,aitype/clientscripts/zm_buried_basic_01_char_02.csc
-script,aitype/clientscripts/zm_buried_basic_01_char_03.csc
-script,aitype/clientscripts/zm_buried_basic_01_char_04.csc
-script,aitype/clientscripts/zm_buried_basic_01_char_05.csc
-script,aitype/clientscripts/zm_buried_basic_02_char_01.csc
-script,aitype/clientscripts/zm_buried_basic_02_char_02.csc
-script,aitype/clientscripts/zm_buried_basic_02_char_03.csc
-script,aitype/clientscripts/zm_buried_basic_03.csc
-script,aitype/clientscripts/zm_highrise_basic_01.csc
-script,aitype/clientscripts/zm_highrise_basic_02.csc
-script,aitype/clientscripts/zm_highrise_basic_03.csc
-script,aitype/clientscripts/zm_highrise_leaper.csc
-script,aitype/clientscripts/zm_nuked_basic_01.csc
-script,aitype/clientscripts/zm_nuked_basic_01_beyes.csc
-script,aitype/clientscripts/zm_nuked_basic_02.csc
-script,aitype/clientscripts/zm_nuked_basic_02_beyes.csc
-script,aitype/clientscripts/zm_tomb_basic_crusader.csc
-script,aitype/clientscripts/zm_tomb_basic_german.csc
-script,aitype/clientscripts/zm_tomb_basic_german2.csc
-script,aitype/clientscripts/zm_tomb_basic_zone_capture.csc
-script,aitype/clientscripts/zm_transit_basic_01.csc
-script,aitype/clientscripts/zm_transit_basic_02.csc
-script,aitype/clientscripts/zm_transit_basic_03.csc
-script,aitype/clientscripts/zm_transit_basic_05.csc
-script,aitype/clientscripts/zm_transit_basic_08.csc
-script,aitype/clientscripts/zm_transit_basic_09.csc
-script,clientscripts/mp/zombies/_zm_weap_thundergun.csc
 script,scripts/zm/thundergun.csc
 
 localize,thundergun

@@ -664,6 +664,7 @@ zm_grabbed_by_mech : notify mechz_grabbed
 	ai_zombie_grabbed_by_mech 
 }
 
+// BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {
 	ai_zombie_thundergun_hit_faceplant
@@ -712,3 +713,4 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 {
 	ai_zombie_thundergun_getup_quick_a
 }
+// END THUNDERGUN

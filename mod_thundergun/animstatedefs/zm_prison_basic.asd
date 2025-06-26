@@ -728,6 +728,8 @@ zm_blundersplat_stun_crawl : aliased restart missing_legs notify blundersplat_st
 	acid_stun_b ai_zombie_crawl_death_v2
 }
 
+
+// BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {
 	ai_zombie_thundergun_hit_faceplant
@@ -776,3 +778,4 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 {
 	ai_zombie_thundergun_getup_quick_a
 }
+// END THUNDERGUN

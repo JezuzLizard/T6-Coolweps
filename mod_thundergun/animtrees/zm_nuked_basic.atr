@@ -333,7 +333,7 @@ body
 	ai_zombie_traverse_garage_roll
 
 
-	// one inch punch anims
+	// BEGIN THUNDERGUN
 	ai_zombie_thundergun_hit
 	
 	ai_zombie_thundergun_hit_armslegsforward
@@ -366,4 +366,5 @@ body
 	ai_zombie_thundergun_sprinter_getup_a
 	ai_zombie_thundergun_sprinter_getup_b
 	ai_zombie_thundergun_sprinter_getup_c
+	// END THUNDERGUN
 } // end body

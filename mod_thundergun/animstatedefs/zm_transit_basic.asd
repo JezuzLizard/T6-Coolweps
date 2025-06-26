@@ -958,6 +958,7 @@ zm_riotshield_breakthrough_crawl : missing_legs notify riotshield_breakthrough_a
 	//ai_zombie_crawl_riotshield_breakthrough_v2
 }
 
+// BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {
 	ai_zombie_thundergun_hit_faceplant
@@ -1006,3 +1007,4 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 {
 	ai_zombie_thundergun_getup_quick_a
 }
+//END THUNDERGUN

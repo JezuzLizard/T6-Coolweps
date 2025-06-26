@@ -323,10 +323,6 @@ body
 	ai_zombie_thundergun_getup_a
 	ai_zombie_thundergun_getup_quick_a
 	
-	ai_zombie_thundergun_sprinter_getup_a
-	ai_zombie_thundergun_sprinter_getup_b
-	ai_zombie_thundergun_sprinter_getup_c
-	
 	ai_zombie_hedgemaze_emerge_slow
 	ai_zombie_hedgemaze_emerge_fast
 
@@ -407,4 +403,9 @@ body
 	ai_zombie_crawl_traverse_48
 	ai_zombie_traverse_48
 	
+	// BEGIN THUNDERGUN
+	ai_zombie_thundergun_sprinter_getup_a
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+	// END THUNDERGUN
 } // end body

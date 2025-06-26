@@ -567,7 +567,7 @@ body
 	ai_zombie_riser_elevator_from_floor
 	ai_zombie_riser_elevator_from_ceiling
 
-	// one inch punch anims
+	// BEGIN THUNDERGUN
 	ai_zombie_thundergun_hit
 	
 	ai_zombie_thundergun_hit_armslegsforward
@@ -600,4 +600,5 @@ body
 	ai_zombie_thundergun_sprinter_getup_a
 	ai_zombie_thundergun_sprinter_getup_b
 	ai_zombie_thundergun_sprinter_getup_c
+	// END THUNDERGUN
 } // end body

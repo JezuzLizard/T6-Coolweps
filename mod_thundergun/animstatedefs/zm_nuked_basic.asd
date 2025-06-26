@@ -509,6 +509,8 @@ zm_traverse_crawl : aliased restart missing_legs notify traverse_anim
 	traverse_garage_door_crawl		ai_zombie_crawl
 }
 
+
+// BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {
 	ai_zombie_thundergun_hit_faceplant
@@ -557,3 +559,4 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 {
 	ai_zombie_thundergun_getup_quick_a
 }
+// END THUNDERGUN

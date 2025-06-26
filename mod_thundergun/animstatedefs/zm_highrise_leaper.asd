@@ -335,6 +335,7 @@ zm_spawn_elevator_from_floor : notify spawn_anim
 	ai_zombie_leaper_elevator_from_floor
 }
 
+// BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {
 	ai_zombie_thundergun_hit_faceplant
@@ -383,3 +384,4 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 {
 	ai_zombie_thundergun_getup_quick_a
 }
+// END THUNDERGUN
