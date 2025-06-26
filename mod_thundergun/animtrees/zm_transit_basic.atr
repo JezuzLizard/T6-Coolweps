@@ -513,6 +513,8 @@ ai_zombie_bus_front_window_climbup_from_inside
 	//ai_zombie_crawl_riotshield_loop_v8
 	ai_zombie_crawl_riotshield_breakthrough_v1
 	//ai_zombie_crawl_riotshield_breakthrough_v2 
+
+	// CUSTOM ATR TRANSIT BASIC
 	
 	// BEING THUNDERGUN
 	ai_zombie_thundergun_hit
@@ -548,4 +550,12 @@ ai_zombie_bus_front_window_climbup_from_inside
 	ai_zombie_thundergun_sprinter_getup_b
 	ai_zombie_thundergun_sprinter_getup_c
 	// END THUNDERGUN
+
+	// BEGIN PERKS
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+	// END PERKS
 } // end body

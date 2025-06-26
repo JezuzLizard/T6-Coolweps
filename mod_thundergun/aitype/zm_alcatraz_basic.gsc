@@ -346,6 +346,8 @@ reference_anims_from_animtree()
     dummy_anim_ref = %ai_zombie_acid_stun_d;
     dummy_anim_ref = %ai_zombie_acid_stun_e;
 
+		// CUSTOM AITYPE PRISON BASIC
+
 		// BEGIN THUNDERGUN
 		dummy_anim_ref = %ai_zombie_thundergun_getup;
     dummy_anim_ref = %ai_zombie_thundergun_getup_a;

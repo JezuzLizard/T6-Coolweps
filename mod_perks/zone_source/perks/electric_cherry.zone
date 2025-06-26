@@ -44,4 +44,10 @@ rawfile,vision/zm_electric_cherry.vision
 image,minimap_icon_electric_cherry
 material,specialty_electric_cherry_zombie
 
+xanim,ai_zombie_afterlife_stun_a
+xanim,ai_zombie_afterlife_stun_b
+xanim,ai_zombie_afterlife_stun_c
+xanim,ai_zombie_afterlife_stun_d
+xanim,ai_zombie_afterlife_stun_e
+
 script,clientscripts/mp/zombies/_zm_perk_electric_cherry.csc

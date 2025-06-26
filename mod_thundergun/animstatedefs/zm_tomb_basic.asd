@@ -664,6 +664,8 @@ zm_grabbed_by_mech : notify mechz_grabbed
 	ai_zombie_grabbed_by_mech 
 }
 
+// CUSTOM ASD TOMB BASIC
+
 // BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {

@@ -810,6 +810,8 @@ zombie_riser_elevator_from_ceiling : notify rise_anim
 	ai_zombie_riser_elevator_from_ceiling
 }
 
+// CUSTOM ASD HIGHRISE BASIC
+
 // BEGIN THUNDERGUN
 zm_thundergun_fall_front : restart notify thundergun_fall_anim
 {
@@ -860,3 +862,14 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 	ai_zombie_thundergun_getup_quick_a
 }
 // END THUNDERGUN
+
+// BEGIN PERKS
+zm_afterlife_stun : restart notify stunned
+{
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+}
+// END PERKS

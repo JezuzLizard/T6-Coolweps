@@ -439,6 +439,8 @@ reference_anims_from_animtree()
     dummy_anim_ref = %ai_zombie_crawl_riotshield_loop_v1;
     dummy_anim_ref = %ai_zombie_crawl_riotshield_breakthrough_v1;
 
+		// CUSTOM AITYPE TRANSIT BASIC
+
 		// BEGIN THUNDERGUN
 		dummy_anim_ref = %ai_zombie_thundergun_getup;
     dummy_anim_ref = %ai_zombie_thundergun_getup_a;
@@ -464,6 +466,14 @@ reference_anims_from_animtree()
     dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_b;
     dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_c;
 		// END THUNDERGUN
+
+		// BEGIN PERKS
+		dummy_anim_ref = %ai_zombie_afterlife_stun_a;
+    dummy_anim_ref = %ai_zombie_afterlife_stun_b;
+    dummy_anim_ref = %ai_zombie_afterlife_stun_c;
+    dummy_anim_ref = %ai_zombie_afterlife_stun_d;
+    dummy_anim_ref = %ai_zombie_afterlife_stun_e;
+		// END PERKS
 }
 
 main()

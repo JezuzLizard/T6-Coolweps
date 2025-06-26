@@ -332,6 +332,7 @@ body
 //	ai_zombie_crawl_jump_up_2_climb_coast
 	ai_zombie_traverse_garage_roll
 
+	// CUSTOM ATR NUKED BASIC
 
 	// BEGIN THUNDERGUN
 	ai_zombie_thundergun_hit
@@ -367,4 +368,12 @@ body
 	ai_zombie_thundergun_sprinter_getup_b
 	ai_zombie_thundergun_sprinter_getup_c
 	// END THUNDERGUN
+
+	// BEGIN PERKS
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+	// END PERKS
 } // end body

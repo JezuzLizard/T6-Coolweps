@@ -94,7 +94,6 @@ xanim,ai_zombie_thundergun_sprinter_getup_c
 // Zombie Animstatedefs (for knockdown anims)
 rawfile,animstatedefs/zm_buried_basic.asd
 rawfile,animstatedefs/zm_highrise_basic.asd
-rawfile,animstatedefs/zm_highrise_leaper.asd
 rawfile,animstatedefs/zm_nuked_basic.asd
 rawfile,animstatedefs/zm_prison_basic.asd
 rawfile,animstatedefs/zm_tomb_basic.asd
@@ -103,7 +102,6 @@ rawfile,animstatedefs/zm_transit_basic.asd
 // Zombie Animtrees (for knockdown anims)
 rawfile,animtrees/zm_buried_basic.atr
 rawfile,animtrees/zm_highrise_basic.atr
-rawfile,animtrees/zm_highrise_leaper.atr
 rawfile,animtrees/zm_nuked_basic.atr
 rawfile,animtrees/zm_prison_basic.atr
 rawfile,animtrees/zm_tomb_basic.atr

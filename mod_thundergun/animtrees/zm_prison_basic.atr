@@ -400,6 +400,8 @@ body
 	ai_zombie_acid_stun_c
 	ai_zombie_acid_stun_d
 	ai_zombie_acid_stun_e
+
+	// CUSTOM ATR PRISON BASIC
 	
 	// BEGIN THUNDERGUN
 	ai_zombie_thundergun_hit

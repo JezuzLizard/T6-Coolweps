@@ -347,6 +347,8 @@ reference_anims_from_animtree()
     dummy_anim_ref = %ai_zombie_firestaff_death_collapse_a;
     dummy_anim_ref = %ai_zombie_firestaff_death_collapse_b;
     dummy_anim_ref = %ai_zombie_grabbed_by_mech;
+
+		// CUSTOM AITYPE TOMB BASIC
 }
 
 main()

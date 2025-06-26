@@ -448,4 +448,5 @@ body
 	// Zombie grabbed by MechZ
 	ai_zombie_grabbed_by_mech 
 
+	// CUSTOM ATR TOMB BASIC
 } // end body
