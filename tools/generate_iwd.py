@@ -5,20 +5,45 @@ import sys
 import shutil
 
 def read_file_list(file_path):
-	files = []
+	includes = []
+	excludes = []
 	with open(file_path, 'r', encoding='utf-8') as f:
 		for line in f:
 			line = line.strip()
-			if len(line) <= 0 or line.startswith('//'):
+			if not line or line.startswith('//'):
 				continue
 				
-			matched = glob.glob(os.path.join(os.path.dirname(file_path), line), recursive=True)
-			if matched:
-				files.extend(matched)
+			if line.startswith('!'):
+				excludes.append(line[1:])
 			else:
-				files.append(os.path.join(os.path.dirname(file_path), line))
+				includes.append(line)
 
-	return files
+	# Expand includes
+	files = []
+	for pattern in includes:
+		matched = glob.glob(os.path.join(os.path.dirname(file_path), pattern), recursive=True)
+		if matched:
+			files.extend(matched)
+		else:
+			files.append(os.path.join(os.path.dirname(file_path), pattern))
+
+	# Expand excludes
+	exclude_paths = set()
+	for pattern in excludes:
+		matched = glob.glob(os.path.join(os.path.dirname(file_path), pattern), recursive=True)
+		exclude_paths.update(os.path.abspath(p) for p in matched)
+
+	# Filter out excluded files and directories
+	filtered_files = []
+	for f in files:
+		abs_f = os.path.abspath(f)
+		# Exclude if file or any parent is in exclude_paths
+		if any(abs_f == ex or abs_f.startswith(ex + os.sep) for ex in exclude_paths):
+			continue
+
+		filtered_files.append(f)
+
+	return filtered_files
 
 def find_files_files(root_dir):
 	files_files = []

@@ -1,0 +1,610 @@
+// CUSTOM AITYPE PRISON BASIC
+// BEGIN THUNDERGUN
+dummy_anim_ref = %ai_zombie_thundergun_getup;
+dummy_anim_ref = %ai_zombie_thundergun_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_c;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_c;
+dummy_anim_ref = %ai_zombie_thundergun_hit;
+dummy_anim_ref = %ai_zombie_thundergun_hit_armslegsforward;
+dummy_anim_ref = %ai_zombie_thundergun_hit_deadfallknee;
+dummy_anim_ref = %ai_zombie_thundergun_hit_doublebounce;
+dummy_anim_ref = %ai_zombie_thundergun_hit_faceplant;
+dummy_anim_ref = %ai_zombie_thundergun_hit_flatonback;
+dummy_anim_ref = %ai_zombie_thundergun_hit_forwardtoface;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_stumblefall;
+dummy_anim_ref = %ai_zombie_thundergun_hit_upontoback;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_c;
+// END THUNDERGUN
+// ENDCUSTOM AITYPE PRISON BASIC
+
+// CUSTOM AITYPE BURIED BASIC
+// BEGIN THUNDERGUN
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_c;
+// END THUNDERGUN
+// ENDCUSTOM AITYPE BURIED BASIC
+
+// CUSTOM AITYPE HIGHRISE BASIC
+// BEGIN THUNDERGUN
+dummy_anim_ref = %ai_zombie_thundergun_getup;
+dummy_anim_ref = %ai_zombie_thundergun_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_c;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_c;
+dummy_anim_ref = %ai_zombie_thundergun_hit;
+dummy_anim_ref = %ai_zombie_thundergun_hit_armslegsforward;
+dummy_anim_ref = %ai_zombie_thundergun_hit_deadfallknee;
+dummy_anim_ref = %ai_zombie_thundergun_hit_doublebounce;
+dummy_anim_ref = %ai_zombie_thundergun_hit_faceplant;
+dummy_anim_ref = %ai_zombie_thundergun_hit_flatonback;
+dummy_anim_ref = %ai_zombie_thundergun_hit_forwardtoface;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_stumblefall;
+dummy_anim_ref = %ai_zombie_thundergun_hit_upontoback;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_c;
+// END THUNDERGUN
+// ENDCUSTOM AITYPE HIGHRISE BASIC
+
+// CUSTOM AITYPE NUKED BASIC
+// BEGIN THUNDERGUN
+dummy_anim_ref = %ai_zombie_thundergun_getup;
+dummy_anim_ref = %ai_zombie_thundergun_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_c;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_c;
+dummy_anim_ref = %ai_zombie_thundergun_hit;
+dummy_anim_ref = %ai_zombie_thundergun_hit_armslegsforward;
+dummy_anim_ref = %ai_zombie_thundergun_hit_deadfallknee;
+dummy_anim_ref = %ai_zombie_thundergun_hit_doublebounce;
+dummy_anim_ref = %ai_zombie_thundergun_hit_faceplant;
+dummy_anim_ref = %ai_zombie_thundergun_hit_flatonback;
+dummy_anim_ref = %ai_zombie_thundergun_hit_forwardtoface;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_stumblefall;
+dummy_anim_ref = %ai_zombie_thundergun_hit_upontoback;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_c;
+// END THUNDERGUN
+// ENDCUSTOM AITYPE NUKED BASIC
+
+// CUSTOM AITYPE TRANSIT BASIC
+// BEGIN THUNDERGUN
+dummy_anim_ref = %ai_zombie_thundergun_getup;
+dummy_anim_ref = %ai_zombie_thundergun_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_c;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_a;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_b;
+dummy_anim_ref = %ai_zombie_thundergun_getup_quick_c;
+dummy_anim_ref = %ai_zombie_thundergun_hit;
+dummy_anim_ref = %ai_zombie_thundergun_hit_armslegsforward;
+dummy_anim_ref = %ai_zombie_thundergun_hit_deadfallknee;
+dummy_anim_ref = %ai_zombie_thundergun_hit_doublebounce;
+dummy_anim_ref = %ai_zombie_thundergun_hit_faceplant;
+dummy_anim_ref = %ai_zombie_thundergun_hit_flatonback;
+dummy_anim_ref = %ai_zombie_thundergun_hit_forwardtoface;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_jackiespin_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_left;
+dummy_anim_ref = %ai_zombie_thundergun_hit_legsout_right;
+dummy_anim_ref = %ai_zombie_thundergun_hit_stumblefall;
+dummy_anim_ref = %ai_zombie_thundergun_hit_upontoback;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_c;
+// END THUNDERGUN
+// ENDCUSTOM AITYPE TRANSIT BASIC
+
+// CUSTOM ASD BURIED BASIC
+// BEGIN THUNDERGUN
+zm_thundergun_fall_front : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_thundergun_fall_front_crawl : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_thundergun_fall_left : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_thundergun_fall_right : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_thundergun_fall_back : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_thundergun_getup_back_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_thundergun_getup_back_late : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+// END THUNDERGUN
+// ENDCUSTOM ASD BURIED BASIC
+
+// CUSTOM ASD HIGHRISE BASIC
+// BEGIN THUNDERGUN
+zm_thundergun_fall_front : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_thundergun_fall_front_crawl : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_thundergun_fall_left : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_thundergun_fall_right : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_thundergun_fall_back : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_thundergun_getup_back_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_thundergun_getup_back_late : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+// END THUNDERGUN
+// ENDCUSTOM ASD HIGHRISE BASIC
+
+// CUSTOM ASD NUKED BASIC
+// BEGIN THUNDERGUN
+zm_thundergun_fall_front : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_thundergun_fall_front_crawl : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_thundergun_fall_left : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_thundergun_fall_right : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_thundergun_fall_back : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_thundergun_getup_back_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_thundergun_getup_back_late : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+// END THUNDERGUN
+// ENDCUSTOM ASD NUKED BASIC
+
+// CUSTOM ASD NUKED BASIC
+// BEGIN THUNDERGUN
+zm_thundergun_fall_front : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_thundergun_fall_front_crawl : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_thundergun_fall_left : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_thundergun_fall_right : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_thundergun_fall_back : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_thundergun_getup_back_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_thundergun_getup_back_late : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+// END THUNDERGUN
+// ENDCUSTOM ASD NUKED BASIC
+
+// CUSTOM ASD PRISON BASIC
+// BEGIN THUNDERGUN
+zm_thundergun_fall_front : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_thundergun_fall_front_crawl : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_thundergun_fall_left : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_thundergun_fall_right : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_thundergun_fall_back : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_thundergun_getup_back_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_thundergun_getup_back_late : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+// END THUNDERGUN
+// ENDCUSTOM ASD PRISON BASIC
+
+// CUSTOM ASD TOMB BASIC
+// BEGIN THUNDERGUN
+zm_thundergun_fall_front : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_thundergun_fall_front_crawl : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_thundergun_fall_left : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_thundergun_fall_right : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_thundergun_fall_back : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_thundergun_getup_back_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_thundergun_getup_back_late : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+// END THUNDERGUN
+// ENDCUSTOM ASD TOMB BASIC
+
+// CUSTOM ASD TRANSIT BASIC
+// BEGIN THUNDERGUN
+zm_thundergun_fall_front : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_faceplant
+	ai_zombie_thundergun_hit_deadfallknee
+	ai_zombie_thundergun_hit_forwardtoface
+}
+
+zm_thundergun_fall_front_crawl : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_armslegsforward
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_forwardtoface	
+}
+
+zm_thundergun_fall_left : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_right
+}
+
+zm_thundergun_fall_right : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_legsout_left
+}
+	
+zm_thundergun_fall_back : restart notify thundergun_fall_anim
+{
+	ai_zombie_thundergun_hit_upontoback
+	ai_zombie_thundergun_hit_doublebounce
+	ai_zombie_thundergun_hit_flatonback
+	ai_zombie_thundergun_hit_armslegsforward
+}
+
+zm_thundergun_getup_back_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_sprinter_getup_b
+	ai_zombie_thundergun_sprinter_getup_c
+}
+	
+zm_thundergun_getup_back_late : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_b
+	ai_zombie_thundergun_getup_quick_c
+}
+
+zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
+{
+	ai_zombie_thundergun_getup_quick_a
+}
+//END THUNDERGUN
+// ENDCUSTOM ASD TRANSIT BASIC
+
+// CUSTOM ATR BURIED BASIC
+// BEGIN THUNDERGUN
+ai_zombie_thundergun_sprinter_getup_a
+ai_zombie_thundergun_sprinter_getup_b
+ai_zombie_thundergun_sprinter_getup_c
+// END THUNDERGUN
+// ENDCUSTOM ATR BURIED BASIC
+
+// CUSTOM ATR HIGHRISE BASIC
+// BEGIN THUNDERGUN
+ai_zombie_thundergun_hit
+ai_zombie_thundergun_hit_armslegsforward
+ai_zombie_thundergun_hit_doublebounce
+ai_zombie_thundergun_hit_forwardtoface
+ai_zombie_thundergun_hit_upontoback
+ai_zombie_thundergun_hit_stumblefall
+ai_zombie_thundergun_hit_deadfallknee
+ai_zombie_thundergun_hit_flatonback
+ai_zombie_thundergun_hit_legsout_right
+ai_zombie_thundergun_hit_legsout_left
+ai_zombie_thundergun_hit_jackiespin_left
+ai_zombie_thundergun_hit_jackiespin_right
+ai_zombie_thundergun_hit_faceplant
+ai_zombie_thundergun_getup
+ai_zombie_thundergun_getup_a
+ai_zombie_thundergun_getup_b
+ai_zombie_thundergun_getup_c
+ai_zombie_thundergun_getup_quick_a	
+ai_zombie_thundergun_getup_quick_b
+ai_zombie_thundergun_getup_quick_c
+ai_zombie_thundergun_sprinter_getup_a
+ai_zombie_thundergun_sprinter_getup_b
+ai_zombie_thundergun_sprinter_getup_c
+// END THUNDERGUN
+// ENDCUSTOM ATR HIGHRISE BASIC
+
+// CUSTOM ATR NUKED BASIC
+// BEGIN THUNDERGUN
+ai_zombie_thundergun_hit
+ai_zombie_thundergun_hit_armslegsforward
+ai_zombie_thundergun_hit_doublebounce
+ai_zombie_thundergun_hit_forwardtoface
+ai_zombie_thundergun_hit_upontoback
+ai_zombie_thundergun_hit_stumblefall
+ai_zombie_thundergun_hit_deadfallknee
+ai_zombie_thundergun_hit_flatonback
+ai_zombie_thundergun_hit_legsout_right
+ai_zombie_thundergun_hit_legsout_left
+ai_zombie_thundergun_hit_jackiespin_left
+ai_zombie_thundergun_hit_jackiespin_right
+ai_zombie_thundergun_hit_faceplant
+ai_zombie_thundergun_getup
+ai_zombie_thundergun_getup_a
+ai_zombie_thundergun_getup_b
+ai_zombie_thundergun_getup_c
+ai_zombie_thundergun_getup_quick_a	
+ai_zombie_thundergun_getup_quick_b
+ai_zombie_thundergun_getup_quick_c
+ai_zombie_thundergun_sprinter_getup_a
+ai_zombie_thundergun_sprinter_getup_b
+ai_zombie_thundergun_sprinter_getup_c
+// END THUNDERGUN
+// ENDCUSTOM ATR NUKED BASIC
+
+// CUSTOM ATR PRISON BASIC
+// BEGIN THUNDERGUN
+ai_zombie_thundergun_hit
+ai_zombie_thundergun_hit_armslegsforward
+ai_zombie_thundergun_hit_doublebounce
+ai_zombie_thundergun_hit_forwardtoface
+ai_zombie_thundergun_hit_upontoback
+ai_zombie_thundergun_hit_stumblefall
+ai_zombie_thundergun_hit_deadfallknee
+ai_zombie_thundergun_hit_flatonback
+ai_zombie_thundergun_hit_legsout_right
+ai_zombie_thundergun_hit_legsout_left
+ai_zombie_thundergun_hit_jackiespin_left
+ai_zombie_thundergun_hit_jackiespin_right
+ai_zombie_thundergun_hit_faceplant
+ai_zombie_thundergun_getup
+ai_zombie_thundergun_getup_a
+ai_zombie_thundergun_getup_b
+ai_zombie_thundergun_getup_c
+ai_zombie_thundergun_getup_quick_a	
+ai_zombie_thundergun_getup_quick_b
+ai_zombie_thundergun_getup_quick_c
+ai_zombie_thundergun_sprinter_getup_a
+ai_zombie_thundergun_sprinter_getup_b
+ai_zombie_thundergun_sprinter_getup_c
+// END THUNDERGUN
+// ENDCUSTOM ATR PRISON BASIC
+
+// CUSTOM ATR TRANSIT BASIC
+// BEING THUNDERGUN
+ai_zombie_thundergun_hit
+ai_zombie_thundergun_hit_armslegsforward
+ai_zombie_thundergun_hit_doublebounce
+ai_zombie_thundergun_hit_forwardtoface
+ai_zombie_thundergun_hit_upontoback
+ai_zombie_thundergun_hit_stumblefall
+ai_zombie_thundergun_hit_deadfallknee
+ai_zombie_thundergun_hit_flatonback
+ai_zombie_thundergun_hit_legsout_right
+ai_zombie_thundergun_hit_legsout_left
+ai_zombie_thundergun_hit_jackiespin_left
+ai_zombie_thundergun_hit_jackiespin_right
+ai_zombie_thundergun_hit_faceplant
+ai_zombie_thundergun_getup
+ai_zombie_thundergun_getup_a
+ai_zombie_thundergun_getup_b
+ai_zombie_thundergun_getup_c
+ai_zombie_thundergun_getup_quick_a	
+ai_zombie_thundergun_getup_quick_b
+ai_zombie_thundergun_getup_quick_c
+ai_zombie_thundergun_sprinter_getup_a
+ai_zombie_thundergun_sprinter_getup_b
+ai_zombie_thundergun_sprinter_getup_c
+// END THUNDERGUN
+// ENDCUSTOM ATR TRANSIT BASIC

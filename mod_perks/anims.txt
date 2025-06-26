@@ -1,0 +1,131 @@
+// CUSTOM AITYPE BURIED BASIC
+// BEGIN PERKS
+dummy_anim_ref = %ai_zombie_afterlife_stun_a;
+dummy_anim_ref = %ai_zombie_afterlife_stun_b;
+dummy_anim_ref = %ai_zombie_afterlife_stun_c;
+dummy_anim_ref = %ai_zombie_afterlife_stun_d;
+dummy_anim_ref = %ai_zombie_afterlife_stun_e;
+// END PERKS
+// ENDCUSTOM AITYPE BURIED BASIC
+
+// CUSTOM AITYPE HIGHRISE BASIC
+// BEGIN PERKS
+dummy_anim_ref = %ai_zombie_afterlife_stun_a;
+dummy_anim_ref = %ai_zombie_afterlife_stun_b;
+dummy_anim_ref = %ai_zombie_afterlife_stun_c;
+dummy_anim_ref = %ai_zombie_afterlife_stun_d;
+dummy_anim_ref = %ai_zombie_afterlife_stun_e;
+// END PERKS
+// ENDCUSTOM AITYPE HIGHRISE BASIC
+
+// CUSTOM AITYPE NUKED BASIC
+// BEGIN PERKS
+dummy_anim_ref = %ai_zombie_afterlife_stun_a;
+dummy_anim_ref = %ai_zombie_afterlife_stun_b;
+dummy_anim_ref = %ai_zombie_afterlife_stun_c;
+dummy_anim_ref = %ai_zombie_afterlife_stun_d;
+dummy_anim_ref = %ai_zombie_afterlife_stun_e;
+// END PERKS
+// ENDCUSTOM AITYPE NUKED BASIC
+
+// CUSTOM AITYPE TRANSIT BASIC
+// BEGIN PERKS
+dummy_anim_ref = %ai_zombie_afterlife_stun_a;
+dummy_anim_ref = %ai_zombie_afterlife_stun_b;
+dummy_anim_ref = %ai_zombie_afterlife_stun_c;
+dummy_anim_ref = %ai_zombie_afterlife_stun_d;
+dummy_anim_ref = %ai_zombie_afterlife_stun_e;
+// END PERKS
+// ENDCUSTOM AITYPE TRANSIT BASIC
+
+// CUSTOM ASD BURIED BASIC
+// BEGIN PERKS
+zm_afterlife_stun : restart notify stunned
+{
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+}
+// END PERKS
+// ENDCUSTOM ASD BURIED BASIC
+
+// CUSTOM ASD HIGHRISE BASIC
+// BEGIN PERKS
+zm_afterlife_stun : restart notify stunned
+{
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+}
+// END PERKS
+// ENDCUSTOM ASD HIGHRISE BASIC
+
+// CUSTOM ASD NUKED BASIC
+// BEGIN PERKS
+zm_afterlife_stun : restart notify stunned
+{
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+}
+// END PERKS
+// ENDCUSTOM ASD NUKED BASIC
+
+// CUSTOM ASD TRANSIT BASIC
+// BEGIN PERKS
+zm_afterlife_stun : restart notify stunned
+{
+	ai_zombie_afterlife_stun_a
+	ai_zombie_afterlife_stun_b
+	ai_zombie_afterlife_stun_c
+	ai_zombie_afterlife_stun_d
+	ai_zombie_afterlife_stun_e
+}
+// END PERKS
+// ENDCUSTOM ASD TRANSIT BASIC
+
+// CUSTOM ATR BURIED BASIC
+// BEGIN PERKS
+ai_zombie_afterlife_stun_a
+ai_zombie_afterlife_stun_b
+ai_zombie_afterlife_stun_c
+ai_zombie_afterlife_stun_d
+ai_zombie_afterlife_stun_e
+// END PERKS
+// ENDCUSTOM ATR BURIED BASIC
+
+// CUSTOM ATR HIGHRISE BASIC
+// BEGIN PERKS
+ai_zombie_afterlife_stun_a
+ai_zombie_afterlife_stun_b
+ai_zombie_afterlife_stun_c
+ai_zombie_afterlife_stun_d
+ai_zombie_afterlife_stun_e
+// END PERKS
+// ENDCUSTOM ATR HIGHRISE BASIC
+
+// CUSTOM ATR NUKED BASIC
+// BEGIN PERKS
+ai_zombie_afterlife_stun_a
+ai_zombie_afterlife_stun_b
+ai_zombie_afterlife_stun_c
+ai_zombie_afterlife_stun_d
+ai_zombie_afterlife_stun_e
+// END PERKS
+// ENDCUSTOM ATR NUKED BASIC
+
+// CUSTOM ATR TRANSIT BASIC
+// BEGIN PERKS
+ai_zombie_afterlife_stun_a
+ai_zombie_afterlife_stun_b
+ai_zombie_afterlife_stun_c
+ai_zombie_afterlife_stun_d
+ai_zombie_afterlife_stun_e
+// END PERKS
+// ENDCUSTOM ATR TRANSIT BASIC
