@@ -5,7 +5,7 @@ import argparse
 def main():
 	parser = argparse.ArgumentParser(description="Tool to convert infostrings.")
 	parser.add_argument("-s", "--sort", default=False, action="store_true", help="Sort the output JSON keys")
-	parser.add_argument("mode", choices=["tojson", "fromjson"], help="Mode of operation: 'tojson' to convert infostring to JSON, 'fromjson' to convert JSON to infostring")
+	parser.add_argument("mode", nargs="?", choices=["tojson", "fromjson"], default="tojson", help="Mode of operation: 'tojson' to convert infostring to JSON, 'fromjson' to convert JSON to infostring")
 	parser.add_argument("input_file", nargs="?", help="Input file path (optional, uses stdin if not provided)")
 	parser.add_argument("output_file", nargs="?", help="Output file path (optional, prints to stdout if not provided)")
 	args = parser.parse_args()
