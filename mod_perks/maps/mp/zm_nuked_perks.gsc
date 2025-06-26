@@ -499,12 +499,24 @@ _power_on_perk()
 	self thread vending_trigger_think();
 	self thread electric_perks_dialog();
 
-	machine = getent( self.target, "targetname" );
-	machine setmodel( level.nuked_perks[ self.script_noteworthy ].model + "_on" );
-	machine vibrate( vectorscale( ( 0, -1, 0 ), 100.0 ), 0.3, 0.4, 3 );
-	machine playsound( "zmb_perks_power_on" );
-	machine thread perk_fx( level.nuked_perks[ self.script_noteworthy ].perk_fx );
-	machine thread play_loop_on_machine();
+	if ( self.script_noteworthy != "specialty_quickrevive" )
+	{
+		machine = getent( self.target, "targetname" );
+		machine setmodel( level.nuked_perks[ self.script_noteworthy ].model + "_on" );
+		machine vibrate( vectorscale( ( 0, -1, 0 ), 100.0 ), 0.3, 0.4, 3 );
+		machine playsound( "zmb_perks_power_on" );
+		machine thread perk_fx( level.nuked_perks[ self.script_noteworthy ].perk_fx );
+		machine thread play_loop_on_machine();
+	}
+	else
+	{
+		level thread maps\mp\zombies\_zm_perks::turn_revive_on();
+
+		wait 0.05;
+		waittillframeend;
+		level notify( "revive_on" );
+		return;
+	}
 
 	wait 0.05;
 	waittillframeend;

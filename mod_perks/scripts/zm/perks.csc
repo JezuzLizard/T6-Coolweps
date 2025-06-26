@@ -10,6 +10,9 @@ main()
 	
 	level.zombiemode_using_divetonuke_perk = 1;
 	clientscripts\mp\zombies\_zm_perk_divetonuke::enable_divetonuke_perk_for_level();
+
+	level.zombiemode_using_electric_cherry_perk = 1;
+	clientscripts\mp\zombies\_zm_perk_electric_cherry::enable_electric_cherry_perk_for_level();
 }
 
 is_specialty_in_use( perk )

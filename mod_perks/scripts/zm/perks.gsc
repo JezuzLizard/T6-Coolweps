@@ -15,15 +15,20 @@ main()
 	
 	level.zombiemode_using_divetonuke_perk = 1;
 	maps\mp\zombies\_zm_perk_divetonuke::enable_divetonuke_perk_for_level();
-	
 	replacefunc( maps\mp\zombies\_zm_perk_divetonuke::init_divetonuke, ::noop );
+
+	precachemodel( "p6_zm_vending_electric_cherry" );
+	level.zombiemode_using_electric_cherry_perk = 1;
+  maps\mp\zombies\_zm_perk_electric_cherry::enable_electric_cherry_perk_for_level();
+	replacefunc( maps\mp\zombies\_zm_perk_electric_cherry::init_electric_cherry, ::noop );
+	
 	
 	onfinalizeinitialization_callback( ::finalize_initialization );
 }
 
 is_specialty_in_use( perk )
 {
-	switch (perk)
+	switch ( perk )
 	{
 		case "specialty_additionalprimaryweapon":
 			return is_true( level.zombiemode_using_additionalprimaryweapon_perk );
@@ -65,6 +70,9 @@ finalize_initialization()
 {
 	disabledetouronce( maps\mp\zombies\_zm_perk_divetonuke::init_divetonuke );
 	maps\mp\zombies\_zm_perk_divetonuke::init_divetonuke();
+
+	disabledetouronce( maps\mp\zombies\_zm_perk_electric_cherry::init_electric_cherry );
+	maps\mp\zombies\_zm_perk_electric_cherry::init_electric_cherry();
 }
 
 noop()

@@ -21125,6 +21125,7 @@
 "angles" "0 180 0"
 "script_noteworthy" "specialty_longersprint"
 "targetname" "zm_perk_machine"
+"script_string" " zclassic_perks_prison"
 }
 {
 "origin" "1926.81 10300.6 1342.36"
@@ -21143,6 +21144,7 @@
 "angles" "0 208 0"
 "script_noteworthy" "specialty_additionalprimaryweapon"
 "targetname" "zm_perk_machine"
+"script_string" " zclassic_perks_prison"
 }
 {
 "origin" "-749.063 8833.36 1335.13"
@@ -21161,6 +21163,7 @@
 "angles" "0 90 0"
 "script_noteworthy" "specialty_flakjacket"
 "targetname" "zm_perk_machine"
+"script_string" " zclassic_perks_prison"
 }
 {
 "origin" "2256.33 9360.86 1703.81"
