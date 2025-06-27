@@ -515,47 +515,42 @@ ai_zombie_bus_front_window_climbup_from_inside
 	//ai_zombie_crawl_riotshield_breakthrough_v2 
 
 	// CUSTOM ATR TRANSIT BASIC
-	
-	// BEING THUNDERGUN
-	ai_zombie_thundergun_hit
-	
-	ai_zombie_thundergun_hit_armslegsforward
-	ai_zombie_thundergun_hit_doublebounce
-	ai_zombie_thundergun_hit_forwardtoface
-	
-	ai_zombie_thundergun_hit_upontoback
-	ai_zombie_thundergun_hit_stumblefall
-	ai_zombie_thundergun_hit_deadfallknee
-	ai_zombie_thundergun_hit_flatonback
 
-	ai_zombie_thundergun_hit_legsout_right
-	ai_zombie_thundergun_hit_legsout_left
-	
-	ai_zombie_thundergun_hit_jackiespin_left
-	ai_zombie_thundergun_hit_jackiespin_right
-	
-	ai_zombie_thundergun_hit_faceplant
-	
-	ai_zombie_thundergun_getup
-	
-	ai_zombie_thundergun_getup_a
-	ai_zombie_thundergun_getup_b
-	ai_zombie_thundergun_getup_c
-	
-	ai_zombie_thundergun_getup_quick_a	
-	ai_zombie_thundergun_getup_quick_b
-	ai_zombie_thundergun_getup_quick_c
-	
-	ai_zombie_thundergun_sprinter_getup_a
-	ai_zombie_thundergun_sprinter_getup_b
-	ai_zombie_thundergun_sprinter_getup_c
-	// END THUNDERGUN
+// BEGIN PERKS
+ai_zombie_afterlife_stun_a
+ai_zombie_afterlife_stun_b
+ai_zombie_afterlife_stun_c
+ai_zombie_afterlife_stun_d
+ai_zombie_afterlife_stun_e
+// END PERKS
 
-	// BEGIN PERKS
-	ai_zombie_afterlife_stun_a
-	ai_zombie_afterlife_stun_b
-	ai_zombie_afterlife_stun_c
-	ai_zombie_afterlife_stun_d
-	ai_zombie_afterlife_stun_e
-	// END PERKS
+
+// BEING THUNDERGUN
+ai_zombie_thundergun_hit
+ai_zombie_thundergun_hit_armslegsforward
+ai_zombie_thundergun_hit_doublebounce
+ai_zombie_thundergun_hit_forwardtoface
+ai_zombie_thundergun_hit_upontoback
+ai_zombie_thundergun_hit_stumblefall
+ai_zombie_thundergun_hit_deadfallknee
+ai_zombie_thundergun_hit_flatonback
+ai_zombie_thundergun_hit_legsout_right
+ai_zombie_thundergun_hit_legsout_left
+ai_zombie_thundergun_hit_jackiespin_left
+ai_zombie_thundergun_hit_jackiespin_right
+ai_zombie_thundergun_hit_faceplant
+ai_zombie_thundergun_getup
+ai_zombie_thundergun_getup_a
+ai_zombie_thundergun_getup_b
+ai_zombie_thundergun_getup_c
+ai_zombie_thundergun_getup_quick_a	
+ai_zombie_thundergun_getup_quick_b
+ai_zombie_thundergun_getup_quick_c
+ai_zombie_thundergun_sprinter_getup_a
+ai_zombie_thundergun_sprinter_getup_b
+ai_zombie_thundergun_sprinter_getup_c
+// END THUNDERGUN
+
+
+// ENDCUSTOM ATR TRANSIT BASIC
 } // end body

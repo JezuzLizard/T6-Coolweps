@@ -350,6 +350,9 @@ reference_anims_from_animtree()
     dummy_anim_ref = %ai_zombie_grabbed_by_mech;
 
 		// CUSTOM AITYPE TOMB BASIC
+
+		
+// ENDCUSTOM AITYPE TOMB BASIC
 }
 
 main()

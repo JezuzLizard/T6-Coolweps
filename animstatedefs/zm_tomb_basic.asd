@@ -716,3 +716,6 @@ zm_thundergun_getup_belly_early : restart notify thundergun_getup_anim
 	ai_zombie_thundergun_getup_quick_a
 }
 // END THUNDERGUN
+
+
+// ENDCUSTOM ASD TOMB BASIC

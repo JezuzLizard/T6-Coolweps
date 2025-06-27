@@ -7,6 +7,15 @@ set OAT_BASE=%cd%
 set MOD_BASE=%cd%
 set MOD_NAME=zm_perks
 
+python tools/generate_anims.py . ./tools/anims/
+if %ERRORLEVEL% NEQ 0 (
+    COLOR C
+    echo FAIL!
+		popd
+		pause
+		exit 3
+)
+
 "%OAT_BASE%\linker.exe" ^
 -v ^
 --load "%GAME_FOLDER%\zone\all\zm_tomb.ff" ^

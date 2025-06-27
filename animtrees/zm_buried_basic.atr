@@ -404,18 +404,22 @@ body
 	ai_zombie_traverse_48
 
 	// CUSTOM ATR BURIED BASIC
-	
-	// BEGIN THUNDERGUN
-	ai_zombie_thundergun_sprinter_getup_a
-	ai_zombie_thundergun_sprinter_getup_b
-	ai_zombie_thundergun_sprinter_getup_c
-	// END THUNDERGUN
 
-	// BEGIN PERKS
-	ai_zombie_afterlife_stun_a
-	ai_zombie_afterlife_stun_b
-	ai_zombie_afterlife_stun_c
-	ai_zombie_afterlife_stun_d
-	ai_zombie_afterlife_stun_e
-	// END PERKS
+// BEGIN PERKS
+ai_zombie_afterlife_stun_a
+ai_zombie_afterlife_stun_b
+ai_zombie_afterlife_stun_c
+ai_zombie_afterlife_stun_d
+ai_zombie_afterlife_stun_e
+// END PERKS
+
+
+// BEGIN THUNDERGUN
+ai_zombie_thundergun_sprinter_getup_a
+ai_zombie_thundergun_sprinter_getup_b
+ai_zombie_thundergun_sprinter_getup_c
+// END THUNDERGUN
+
+
+// ENDCUSTOM ATR BURIED BASIC
 } // end body

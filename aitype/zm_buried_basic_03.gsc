@@ -346,13 +346,23 @@ reference_anims_from_animtree()
 
 		// CUSTOM AITYPE BURIED BASIC
 
-		// BEGIN PERKS
-		dummy_anim_ref = %ai_zombie_afterlife_stun_a;
-    dummy_anim_ref = %ai_zombie_afterlife_stun_b;
-    dummy_anim_ref = %ai_zombie_afterlife_stun_c;
-    dummy_anim_ref = %ai_zombie_afterlife_stun_d;
-    dummy_anim_ref = %ai_zombie_afterlife_stun_e;
-		// END PERKS
+// BEGIN PERKS
+dummy_anim_ref = %ai_zombie_afterlife_stun_a;
+dummy_anim_ref = %ai_zombie_afterlife_stun_b;
+dummy_anim_ref = %ai_zombie_afterlife_stun_c;
+dummy_anim_ref = %ai_zombie_afterlife_stun_d;
+dummy_anim_ref = %ai_zombie_afterlife_stun_e;
+// END PERKS
+
+
+// BEGIN THUNDERGUN
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_a;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_b;
+dummy_anim_ref = %ai_zombie_thundergun_sprinter_getup_c;
+// END THUNDERGUN
+
+
+// ENDCUSTOM AITYPE BURIED BASIC
 }
 
 main()
