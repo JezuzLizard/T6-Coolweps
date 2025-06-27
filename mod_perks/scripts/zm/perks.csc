@@ -13,6 +13,26 @@ main()
 
 	level.zombiemode_using_electric_cherry_perk = 1;
 	clientscripts\mp\zombies\_zm_perk_electric_cherry::enable_electric_cherry_perk_for_level();
+
+	level._effect["bottle_glow"] = loadfx( "maps/zombie_tomb/fx_tomb_dieselmagic_portal" );
+	level.zombiemode_using_random_perk = 1;
+}
+
+init()
+{
+	[[ level.on_finalize_initialization_callback ]]( ::finalize_initialization );
+}
+
+delay_init()
+{
+	wait 1;
+	clientscripts\mp\zombies\_zm_perk_random::init_animtree();
+}
+
+finalize_initialization()
+{
+	clientscripts\mp\zombies\_zm_perk_random::init();
+	thread delay_init();
 }
 
 is_specialty_in_use( perk )

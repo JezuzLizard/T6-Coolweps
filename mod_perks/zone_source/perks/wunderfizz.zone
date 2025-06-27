@@ -42,3 +42,6 @@ material,mc/mtl_p6_zm_vending_diesel_magic_ball
 material,mc/mtl_p6_zm_vending_diesel_magic_logo
 xmodel,p6_zm_vending_diesel_magic
 xmodel,p6_zm_vending_diesel_magic_on
+
+script,maps/mp/zombies/_zm_perk_random.gsc
+script,clientscripts/mp/zombies/_zm_perk_random.csc

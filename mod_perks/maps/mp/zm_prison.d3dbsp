@@ -21175,3 +21175,60 @@
 "script_int" "1"
 "script_noteworthy" "perk_afterlife_trigger"
 }
+{
+"script_noteworthy" "start_machine"
+"targetname" "random_perk_machine"
+"origin" "351 10199 1337"
+"angles" "0 90 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "random_perk_machine0"
+}
+{
+"origin" "333 10255 1337"
+"model" "p6_zm_al_shock_box_off"
+"classname" "script_model"
+"angles" "0 90 0"
+"targetname" "afterlife_interact"
+"script_string" "random_perk_machine0_on"
+"script_int" "1"
+"script_noteworthy" "perk_afterlife_trigger"
+}
+{
+"script_noteworthy" "start_machine"
+"targetname" "random_perk_machine"
+"origin" "-630 6128 -41"
+"angles" "0 10 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "random_perk_machine1"
+}
+{
+"origin" "-590 6159 -41"
+"model" "p6_zm_al_shock_box_off"
+"classname" "script_model"
+"angles" "0 10 0"
+"targetname" "afterlife_interact"
+"script_string" "random_perk_machine1_on"
+"script_int" "1"
+"script_noteworthy" "perk_afterlife_trigger"
+}
+{
+"script_noteworthy" "start_machine"
+"targetname" "random_perk_machine"
+"origin" "2158 9257 1558"
+"angles" "0 180 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "random_perk_machine2"
+}
+{
+"origin" "2201 9296 1557"
+"model" "p6_zm_al_shock_box_off"
+"classname" "script_model"
+"angles" "0 270 0"
+"targetname" "afterlife_interact"
+"script_string" "random_perk_machine2_on"
+"script_int" "1"
+"script_noteworthy" "perk_afterlife_trigger"
+}

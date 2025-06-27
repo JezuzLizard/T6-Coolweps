@@ -95,6 +95,8 @@ def main():
 				with open(new_file, 'w', encoding='utf-8') as f:
 					f.write(new_content)
 
+	print('Generated anims')
+
 
 if __name__ == '__main__':
 	main()

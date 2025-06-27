@@ -21,9 +21,30 @@ main()
 	level.zombiemode_using_electric_cherry_perk = 1;
   maps\mp\zombies\_zm_perk_electric_cherry::enable_electric_cherry_perk_for_level();
 	replacefunc( maps\mp\zombies\_zm_perk_electric_cherry::init_electric_cherry, ::noop );
-	
+
+	level._effect["bottle_glow"] = loadfx( "maps/zombie_tomb/fx_tomb_dieselmagic_portal" );
+	level.zombiemode_using_random_perk = 1;
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_armorvest" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_quickrevive" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_fastreload" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_rof" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_longersprint" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_deadshot" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_additionalprimaryweapon" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_flakjacket" );
+	maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( "specialty_grenadepulldeath" );
 	
 	onfinalizeinitialization_callback( ::finalize_initialization );
+	
+	flag_wait( "initial_blackscreen_passed" );
+	level thread maps\mp\zombies\_zm_perk_random::start_random_machine();
+
+	if ( level.script == "zm_prison" )
+	{
+		level thread listen_for_afterlife_box_power_random_perk( "0" );
+		level thread listen_for_afterlife_box_power_random_perk( "1" );
+		level thread listen_for_afterlife_box_power_random_perk( "2" );
+	}
 }
 
 is_specialty_in_use( perk )
@@ -66,6 +87,12 @@ is_specialty_in_use( perk )
 	}
 }
 
+delay_init()
+{
+	wait 1;
+	level thread maps\mp\zombies\_zm_perk_random::init_animtree();
+}
+
 finalize_initialization()
 {
 	disabledetouronce( maps\mp\zombies\_zm_perk_divetonuke::init_divetonuke );
@@ -73,10 +100,33 @@ finalize_initialization()
 
 	disabledetouronce( maps\mp\zombies\_zm_perk_electric_cherry::init_electric_cherry );
 	maps\mp\zombies\_zm_perk_electric_cherry::init_electric_cherry();
+
+	maps\mp\zombies\_zm_perk_random::init();
+	thread delay_init();
 }
 
 noop()
 {
+}
+
+listen_for_afterlife_box_power_random_perk( num )
+{
+	machines = getentarray( "random_perk_machine", "targetname" );
+	machine = undefined;
+
+	foreach ( machine_ in machines )
+	{
+		if ( machine_.script_string == "random_perk_machine" + num )
+		{
+			machine = machine_;
+		}
+	}
+
+	machine.is_locked = 1;
+
+	level waittill("random_perk_machine" + num + "_on");
+
+	machine.is_locked = 0;
 }
 
 perk_machine_spawn_init_hook()
