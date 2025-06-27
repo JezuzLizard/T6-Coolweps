@@ -19,12 +19,8 @@ localize,perks
 rawfile,animstatedefs/zm_buried_basic.asd
 rawfile,animstatedefs/zm_highrise_basic.asd
 rawfile,animstatedefs/zm_nuked_basic.asd
-rawfile,animstatedefs/zm_prison_basic.asd
-rawfile,animstatedefs/zm_tomb_basic.asd
 rawfile,animstatedefs/zm_transit_basic.asd
 rawfile,animtrees/zm_buried_basic.atr
 rawfile,animtrees/zm_highrise_basic.atr
 rawfile,animtrees/zm_nuked_basic.atr
-rawfile,animtrees/zm_prison_basic.atr
-rawfile,animtrees/zm_tomb_basic.atr
 rawfile,animtrees/zm_transit_basic.atr
