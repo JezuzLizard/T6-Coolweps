@@ -13,10 +13,10 @@ init_nuked_perks()
 	level.perk_arrival_vehicle = getent( "perk_arrival_vehicle", "targetname" );
 	level.perk_arrival_vehicle setmodel( "tag_origin" );
 	flag_init( "perk_vehicle_bringing_in_perk" );
-
+	
 	precachemodel( "zm_collision_perks1" );
 	precachemodel( "zombie_sign_please_wait" );
-
+	
 	_register_nuked_perk( "zombie_vending_revive", "specialty_quickrevive", "revive_light", 10 );
 	_register_nuked_perk( "zombie_vending_sleight", "specialty_fastreload", "sleight_light", 5 );
 	_register_nuked_perk( "zombie_vending_doubletap2", "specialty_rof", "doubletap_light", 20 );
@@ -31,48 +31,51 @@ init_nuked_perks()
 	_register_nuked_perk( "p6_zm_vending_chugabud", "specialty_finalstand", "tombstone_light" );
 	_register_nuked_perk( "p6_zm_vending_vultureaid", "specialty_nomotionsensor", "vulture_light" );
 	_register_nuked_perk( "p6_zm_vending_diesel_magic", "specialty_stalker", "perk_machine_light" );
-
+	
 	_register_nuked_perk_drop_delay( 3, 5, 30, 60 );
 	_register_nuked_perk_drop_delay( 6, 9, 30, 60 );
-
+	
 	_register_nuked_perk_drop_delay( 10, 14, 60, 120 );
 	_register_nuked_perk_drop_delay( 15, 19, 60, 120 );
 	_register_nuked_perk_drop_delay( 20, 25, 60, 120 );
-
+	
 	_register_nuked_perk_drop_delay( 26, 27, 90, 180 );
 	_register_nuked_perk_drop_delay( 28, 29, 90, 180 );
 	_register_nuked_perk_drop_delay( 30, 31, 90, 180 );
-
+	
 	_register_nuked_perk_drop_delay( 32, 33, 120, 240 );
 	_register_nuked_perk_drop_delay( 34, 35, 120, 240 );
 	_register_nuked_perk_drop_delay( 36, 37, 120, 240 );
-
+	
 	_register_nuked_perk_drop_delay( 38, 39, 150, 300 );
 	_register_nuked_perk_drop_delay( 40, 41, 150, 300 );
 	_register_nuked_perk_drop_delay( 42, 43, 150, 300 );
-
+	
 	_register_nuked_perk_drop_delay( 44, 45, 180, 360 );
-
+	
 	initialize_custom_perk_arrays();
-
+	
 	perk_structs = getstructarray( "zm_random_machine", "script_noteworthy" );
+	
 	for ( i = 0; i < perk_structs.size; i++ )
 	{
 		p_struc = perk_structs[ i ];
 		_register_perk_random_location( p_struc );
 	}
-
+	
 	level.machine_assets = [];
-
+	
 	scripts\zm\perks::mod_vending_precache();
-
+	
 	if ( !isdefined( level.packapunch_timeout ) )
+	{
 		level.packapunch_timeout = 15;
-
+	}
+	
 	level thread perk_hostmigration();
-
+	
 	level thread _power_on_dropped_machines();
-
+	
 	level thread start_zmb_vars();
 }
 
@@ -87,16 +90,18 @@ start_zmb_vars()
 draw_debug_location()
 {
 /#
-
+	
 #/
 }
 
 wait_for_round_range( start_round, end_round )
 {
 	round_to_spawn = randomintrange( start_round, end_round );
-
+	
 	while ( level.round_number < round_to_spawn )
+	{
 		wait 1;
+	}
 }
 
 bring_perk( machine, trigger )
@@ -121,9 +126,9 @@ bring_perk( machine, trigger )
 	scale = level.nuked_perks[ trigger.script_noteworthy ].offset_scale;
 	forward_dir = anglestoforward( machine.original_angles + ( 90, -90, 90 ) );
 	offset = vectorscale( forward_dir * -1, scale );
-
+	
 	is_revive = trigger.script_noteworthy == "specialty_quickrevive";
-
+	
 	if ( isdefined( trigger.blocker_model ) )
 	{
 		if ( is_revive )
@@ -134,32 +139,32 @@ bring_perk( machine, trigger )
 		{
 			if ( isdefined( trigger.blocker_model.clip ) )
 			{
-				trigger.blocker_model.clip delete();
+				trigger.blocker_model.clip delete ();
 				trigger.blocker_model.clip = undefined;
 			}
-
-			trigger.blocker_model delete();
+			
+			trigger.blocker_model delete ();
 		}
 	}
-
+	
 	machine.original_pos = machine.original_pos + ( offset[0], offset[1], 0 );
 	machine.origin = machine.original_pos;
 	machine.angles = machine.original_angles;
-
+	
 	if ( is_revive )
 	{
 		level.quick_revive_final_pos = machine.origin;
 		level.quick_revive_final_angles = machine.angles;
 	}
-
+	
 	machine.fx stoploopsound( 0.5 );
 	machine setclientfield( "clientfield_perk_intro_fx", 0 );
 	playsoundatposition( "zmb_perks_incoming_land", machine.origin );
 	trigger trigger_on();
 	machine thread bring_perk_landing_damage();
 	machine.fx unlink();
-	machine.fx delete();
-
+	machine.fx delete ();
+	
 	level notify( "nuked_perk_machine_landed", trigger );
 }
 
@@ -178,7 +183,7 @@ bring_perk_landing_damage()
 	exploder( 500 + self.script_int );
 	exploder( 511 );
 	players = get_players();
-
+	
 	for ( i = 0; i < players.size; i++ )
 	{
 		if ( distancesquared( players[i].origin, self.origin ) <= player_prone_damage_radius * player_prone_damage_radius )
@@ -188,19 +193,23 @@ bring_perk_landing_damage()
 			radiusdamage( players[i].origin, player_prone_damage_radius / 2, 10, 5, undefined, "MOD_EXPLOSIVE" );
 		}
 	}
-
+	
 	zombies = getaiarray( level.zombie_team );
-
+	
 	for ( i = 0; i < zombies.size; i++ )
 	{
 		zombie = zombies[i];
-
+		
 		if ( !isdefined( zombie ) || !isalive( zombie ) )
+		{
 			continue;
-
+		}
+		
 		if ( distancesquared( zombie.origin, self.origin ) > 250000 )
+		{
 			continue;
-
+		}
+		
 		zombie thread perk_machine_knockdown_zombie( self.origin );
 	}
 }
@@ -218,16 +227,20 @@ perk_follow_path( node )
 {
 	flag_set( "perk_vehicle_bringing_in_perk" );
 	self notify( "newpath" );
-
+	
 	if ( isdefined( node ) )
+	{
 		self.attachedpath = node;
-
+	}
+	
 	pathstart = self.attachedpath;
 	self.currentnode = self.attachedpath;
-
+	
 	if ( !isdefined( pathstart ) )
+	{
 		return;
-
+	}
+	
 	self attachpath( pathstart );
 	self startpath();
 	self waittill( "reached_end_node" );
@@ -247,12 +260,14 @@ _drop_qr_for_the_noobs( top_height, time, accel )
 		forced_quickrevive_nuked_perk_obj = _get_random_remaining_perk_machine( "specialty_quickrevive" );
 		quickrevive_locations = [];
 		quickrevive_structs = getstructarray( "solo_revive", "targetname" );
+		
 		for ( i = 0; i < quickrevive_structs.size; i++ )
 		{
 			quickrevive_locations[ quickrevive_locations.size ] = quickrevive_structs[ i ].script_int;
 		}
+		
 		nuked_perk_location = _get_random_remaining_location( quickrevive_locations );
-
+		
 		quickrevive_trigger = _spawn_perk_machine_from_structs( forced_quickrevive_nuked_perk_obj, nuked_perk_location );
 		quickrevive_machine = quickrevive_trigger.machine;
 		quickrevive_trigger.blocker_model = nuked_perk_location.blocker_model;
@@ -271,26 +286,28 @@ perks_from_the_sky()
 	const top_height = 8000;
 	const time = 5.0;
 	const accel = 0.001;
-
+	
 	flag_wait( "initial_blackscreen_passed" );
 	wait( randomfloatrange( 5.0, 15.0 ) );
-
+	
 	_drop_qr_for_the_noobs( top_height, time, accel );
-
+	
 	for ( i = 0; i < level.nuked_perks.size; i++ )
 	{
 		nuked_perk_location = _get_random_remaining_location();
+		
 		if ( !isdefined( nuked_perk_location ) )
 		{
 			break;
 		}
-
+		
 		nuked_perk = _get_random_remaining_perk_machine();
+		
 		if ( !isdefined( nuked_perk ) )
 		{
 			break;
 		}
-
+		
 		if ( !getdvarint( "zm_nuked_test" ) )
 		{
 			_initiate_perk_drop( i );
@@ -302,7 +319,7 @@ perks_from_the_sky()
 		perk_machine.script_int = nuked_perk_location.script_int;
 		move_perk( perk_machine, top_height, time, accel );
 		perk_trigger trigger_off();
-
+		
 		bring_perk( perk_machine, perk_trigger );
 	}
 }
@@ -318,6 +335,7 @@ move_perk( ent, dist, time, accel )
 _get_blocker_model_for_script_int( script_int )
 {
 	perk_structs = getstructarray( "zm_random_machine", "script_noteworthy" );
+	
 	for ( i = 0; i < perk_structs.size; i++ )
 	{
 		if ( perk_structs[ i ].script_int == script_int )
@@ -325,7 +343,7 @@ _get_blocker_model_for_script_int( script_int )
 			return getent( perk_structs[ i ].target, "targetname" );
 		}
 	}
-
+	
 	return undefined;
 }
 
@@ -335,12 +353,12 @@ _register_nuked_perk( model, script_noteworthy, perk_fx, position_scale = 1 )
 	{
 		level.nuked_perks = [];
 	}
-
+	
 	if ( !scripts\zm\perks::is_specialty_in_use( script_noteworthy ) )
 	{
 		return;
 	}
-
+	
 	new_nuked_perk_obj = spawnstruct();
 	new_nuked_perk_obj.model = model; // const
 	new_nuked_perk_obj.script_noteworthy = script_noteworthy; // const
@@ -357,17 +375,17 @@ _register_perk_random_location( sky_struct )
 	{
 		level.nuked_perk_drop_locations = [];
 	}
-
+	
 	new_perk_location_obj = getstruct( sky_struct.target, "targetname" ); // const
 	new_perk_location_obj.has_been_used = false; // mutable
 	new_perk_location_obj.script_int = sky_struct.script_int; // const
 	new_perk_location_obj.blocker_model = getent( new_perk_location_obj.target, "targetname" ); // const
-
+	
 	if ( new_perk_location_obj.script_int > 10 )
 	{
-		new_perk_location_obj.blocker_model.clip = spawn_blocker_collision( new_perk_location_obj.origin, new_perk_location_obj.angles );
+		new_perk_location_obj.blocker_model.clip = scripts\zm\perks::spawn_blocker_collision( new_perk_location_obj.origin, new_perk_location_obj.angles );
 	}
-
+	
 	level.nuked_perk_drop_locations[ new_perk_location_obj.script_int ] = new_perk_location_obj;
 }
 
@@ -377,17 +395,18 @@ _register_nuked_perk_drop_delay( round_min, round_max, time_min, time_max, early
 	{
 		level.nuked_perk_drop_delays = [];
 	}
-
+	
 	new_nuked_drop_delay_obj = spawnstruct();
 	new_nuked_drop_delay_obj.round_min = round_min;
 	new_nuked_drop_delay_obj.round_max = round_max;
 	new_nuked_drop_delay_obj.time_min = time_min;
 	new_nuked_drop_delay_obj.time_max = time_max;
+	
 	if ( isdefined( early_drop_notify ) )
 	{
 		new_nuked_drop_delay_obj.force_notify = early_drop_notify;
 	}
-
+	
 	level.nuked_perk_drop_delays[ level.nuked_perk_drop_delays.size ] = new_nuked_drop_delay_obj;
 }
 
@@ -397,7 +416,7 @@ _initiate_perk_drop( delay_index )
 	{
 		level endon( level.nuked_perk_drop_delays[ delay_index ].force_notify );
 	}
-
+	
 	round_min = level.nuked_perk_drop_delays[ delay_index ].round_min;
 	round_max = level.nuked_perk_drop_delays[ delay_index ].round_max;
 	time_min = level.nuked_perk_drop_delays[ delay_index ].time_min;
@@ -411,9 +430,11 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 	if ( array_validate( forced_script_ints_array ) )
 	{
 		forced_script_ints_array_keys = array_randomize( getarraykeys( forced_script_ints_array ) );
+		
 		for ( j = 0; j < forced_script_ints_array_keys.size; j++ )
 		{
 			location = level.nuked_perk_drop_locations[ forced_script_ints_array[ forced_script_ints_array_keys[ j ] ] ];
+			
 			if ( !location.has_been_used )
 			{
 				location.has_been_used = true;
@@ -421,14 +442,15 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 			}
 		}
 	}
-
+	
 	spots_used = 0;
 	locations = level.nuked_perk_drop_locations;
 	keys = array_randomize( getarraykeys( level.nuked_perk_drop_locations ) );
+	
 	for ( i = 0; i < locations.size; i++ )
 	{
 		location = locations[ keys[ i ] ];
-
+		
 		if ( location.has_been_used )
 		{
 			spots_used++;
@@ -438,11 +460,11 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 	for ( i = 0; i < locations.size; i++ )
 	{
 		location = locations[ keys[ i ] ];
-
+		
 		if ( !location.has_been_used )
 		{
 			location.has_been_used = true;
-
+			
 			if ( spots_used >= locations.size - 1 )
 			{
 				location.is_last = true;
@@ -451,7 +473,7 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 			return location;
 		}
 	}
-
+	
 	return undefined;
 }
 
@@ -460,26 +482,27 @@ _get_random_remaining_perk_machine( forced_perk = undefined )
 	if ( isdefined( forced_perk ) )
 	{
 		nuked_perk = level.nuked_perks[ forced_perk ];
-
+		
 		if ( !nuked_perk.has_dropped )
 		{
 			nuked_perk.has_dropped = true;
 			return nuked_perk;
 		}
 	}
-
+	
 	random_perks = array_randomize( getarraykeys( level.nuked_perks ) );
+	
 	for ( i = 0; i < random_perks.size; i++ )
 	{
 		nuked_perk = level.nuked_perks[ random_perks[ i ] ];
-
+		
 		if ( !nuked_perk.has_dropped )
 		{
 			nuked_perk.has_dropped = true;
 			return nuked_perk;
 		}
 	}
-
+	
 	return undefined;
 }
 
@@ -487,10 +510,16 @@ _get_random_remaining_perk_machine( forced_perk = undefined )
 _power_on_packapunch()
 {
 	self thread vending_weapon_upgrade();
+	
 	if ( isdefined( level._custom_turn_packapunch_on ) )
+	{
 		level thread [[ level._custom_turn_packapunch_on ]]();
+	}
 	else
+	{
 		level thread turn_packapunch_on();
+	}
+	
 	wait 0.05;
 	waittillframeend;
 	level notify( "Pack_A_Punch_on" );
@@ -501,7 +530,7 @@ _power_on_perk()
 {
 	self thread vending_trigger_think();
 	self thread electric_perks_dialog();
-
+	
 	if ( self.script_noteworthy != "specialty_quickrevive" )
 	{
 		machine = getent( self.target, "targetname" );
@@ -514,13 +543,13 @@ _power_on_perk()
 	else
 	{
 		level thread maps\mp\zombies\_zm_perks::turn_revive_on();
-
+		
 		wait 0.05;
 		waittillframeend;
 		level notify( "revive_on" );
 		return;
 	}
-
+	
 	wait 0.05;
 	waittillframeend;
 	level notify( self.script_noteworthy + "_power_on" );
@@ -530,23 +559,23 @@ _power_on_perk()
 _power_on_dropped_machines()
 {
 	level endon( "end_game" );
-
+	
 	for ( ;; )
 	{
 		level waittill( "nuked_perk_machine_landed", perk_trigger );
-
+		
 		// wunderfizz
 		if ( perk_trigger.script_noteworthy == "specialty_stalker" )
 		{
 			continue;
 		}
-
+		
 		if ( perk_trigger.script_noteworthy == "specialty_weapupgrade" )
 		{
 			perk_trigger thread _power_on_packapunch();
 			continue;
 		}
-
+		
 		perk_trigger thread _power_on_perk();
 	}
 }
@@ -558,7 +587,7 @@ _spawn_perk_machine_from_structs( perk_struct, location_struct )
 	origin = location_struct.origin;
 	angles = location_struct.angles;
 	blocker_model = location_struct.blocker_model;
-
+	
 	return _spawn_perk_machine( perk, model, origin, angles, blocker_model );
 }
 
@@ -575,7 +604,7 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 	perk_machine = spawn( "script_model", origin );
 	perk_machine.angles = angles;
 	perk_machine setmodel( model );
-
+	
 	if ( isdefined( level._no_vending_machine_bump_trigs ) && level._no_vending_machine_bump_trigs )
 	{
 		bump_trigger = undefined;
@@ -586,13 +615,13 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 		bump_trigger.script_activated = 1;
 		bump_trigger.script_sound = "zmb_perks_bump_bottle";
 		bump_trigger.targetname = "audio_bump_trigger";
-
+		
 		if ( specialty_perk != "specialty_weapupgrade" )
 		{
 			bump_trigger thread maps\mp\zombies\_zm_perks::thread_bump_trigger();
 		}
 	}
-
+	
 	collision = spawn( "script_model", origin, 1 );
 	collision.angles = angles;
 	collision setmodel( "zm_collision_perks1" );
@@ -601,12 +630,12 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 	use_trigger.clip = collision;
 	use_trigger.machine = perk_machine;
 	use_trigger.bump = bump_trigger;
-
+	
 	if ( isdefined( blocker_model ) )
 	{
 		use_trigger.blocker_model = blocker_model;
 	}
-
+	
 	switch ( specialty_perk )
 	{
 		case "specialty_quickrevive":
@@ -617,11 +646,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_revive";
 			perk_machine.script_string = "revive_perk";
 			perk_machine.targetname = "vending_revive";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "revive_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_fastreload":
 		case "specialty_fastreload_upgrade":
 			use_trigger.script_sound = "mus_perks_speed_jingle";
@@ -630,11 +662,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_sleight";
 			perk_machine.script_string = "speedcola_perk";
 			perk_machine.targetname = "vending_sleight";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "speedcola_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_longersprint":
 		case "specialty_longersprint_upgrade":
 			use_trigger.script_sound = "mus_perks_stamin_jingle";
@@ -643,11 +678,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_marathon";
 			perk_machine.script_string = "marathon_perk";
 			perk_machine.targetname = "vending_marathon";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "marathon_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_armorvest":
 		case "specialty_armorvest_upgrade":
 			use_trigger.script_sound = "mus_perks_jugganog_jingle";
@@ -657,11 +695,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_jugg";
 			perk_machine.script_string = "jugg_perk";
 			perk_machine.targetname = "vending_jugg";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "jugg_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_scavenger":
 		case "specialty_scavenger_upgrade":
 			use_trigger.script_sound = "mus_perks_tombstone_jingle";
@@ -670,11 +711,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_tombstone";
 			perk_machine.script_string = "tombstone_perk";
 			perk_machine.targetname = "vending_tombstone";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "tombstone_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_rof":
 		case "specialty_rof_upgrade":
 			use_trigger.script_sound = "mus_perks_doubletap_jingle";
@@ -683,11 +727,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_doubletap";
 			perk_machine.script_string = "tap_perk";
 			perk_machine.targetname = "vending_doubletap";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "tap_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_finalstand":
 		case "specialty_finalstand_upgrade":
 			use_trigger.script_sound = "mus_perks_whoswho_jingle";
@@ -696,11 +743,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_chugabud";
 			perk_machine.script_string = "tap_perk";
 			perk_machine.targetname = "vending_chugabud";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "tap_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_additionalprimaryweapon":
 		case "specialty_additionalprimaryweapon_upgrade":
 			use_trigger.script_sound = "mus_perks_mulekick_jingle";
@@ -709,24 +759,27 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_additionalprimaryweapon";
 			perk_machine.script_string = "tap_perk";
 			perk_machine.targetname = "vending_additionalprimaryweapon";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "tap_perk";
-
+			}
+			
 			break;
+			
 		case "specialty_weapupgrade":
 			use_trigger.target = "vending_packapunch";
 			use_trigger.script_sound = "mus_perks_packa_jingle";
 			use_trigger.script_label = "mus_perks_packa_sting";
 			use_trigger.longjinglewait = 1;
 			perk_machine.targetname = "vending_packapunch";
-
+			
 			flag_pos = spawnStruct();
 			flag_pos.targetname = "pack_flag";
 			flag_pos.origin = origin + ( anglesToForward( angles ) * 29 ) + ( anglesToRight( angles ) * -13.5 ) + ( anglesToUp( angles ) * 49.5 );
 			flag_pos.angles = angles + ( 0, 180, 180 );
 			flag_pos.model = "zombie_sign_please_wait";
-
+			
 			if ( isdefined( flag_pos ) )
 			{
 				perk_machine_flag = spawn( "script_model", flag_pos.origin );
@@ -735,13 +788,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 				perk_machine_flag.targetname = flag_pos.targetname;
 				perk_machine.target = "pack_flag";
 			}
-
+			
 			if ( isdefined( bump_trigger ) )
 			{
 				bump_trigger.script_string = "perks_rattle";
 			}
-
+			
 			break;
+			
 		case "specialty_deadshot":
 		case "specialty_deadshot_upgrade":
 			use_trigger.script_sound = "mus_perks_deadshot_jingle";
@@ -750,11 +804,14 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_deadshot";
 			perk_machine.script_string = "deadshot_vending";
 			perk_machine.targetname = "vending_deadshot";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "deadshot_vending";
-
+			}
+			
 			break;
+			
 		default:
 			use_trigger.script_sound = "mus_perks_speed_jingle";
 			use_trigger.script_string = "speedcola_perk";
@@ -762,31 +819,25 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 			use_trigger.target = "vending_sleight";
 			perk_machine.script_string = "speedcola_perk";
 			perk_machine.targetname = "vending_sleight";
-
+			
 			if ( isdefined( bump_trigger ) )
+			{
 				bump_trigger.script_string = "speedcola_perk";
-
+			}
+			
 			break;
 	}
-
+	
 	if ( isdefined( level._custom_perks[ specialty_perk ] ) && isdefined( level._custom_perks[ specialty_perk ].perk_machine_set_kvps ) )
+	{
 		[[ level._custom_perks[ specialty_perk ].perk_machine_set_kvps ]]( use_trigger, perk_machine, bump_trigger, collision );
-
+	}
+	
 	if ( specialty_perk == "specialty_grenadepulldeath" )
 	{
-			use_trigger.target = "vending_cherry";
-			perk_machine.targetname = "vending_cherry";
+		use_trigger.target = "vending_cherry";
+		perk_machine.targetname = "vending_cherry";
 	}
-
+	
 	return use_trigger;
-}
-
-spawn_blocker_collision( origin, angles )
-{
-	blocker = spawn( "script_model", origin, 1 );
-	blocker.angles = angles;
-	blocker setmodel( "zm_collision_perks1" );
-	blocker.script_noteworthy = "clip";
-	blocker disconnectpaths();
-	return blocker;
 }

@@ -47,11 +47,6 @@ init()
 		level._powerup_grab_check = ::minigun_powerup_grab_check;
 	}
 	
-	if ( level.script == "zm_tomb" )
-	{
-		level.zombie_powerups[ "minigun" ].func_should_drop_with_regular_powerups = ::func_should_drop_minigun_tomb;
-	}
-	
 	if ( level.script == "zm_buried" )
 	{
 		replacefunc( ::is_temporary_zombie_weapon, ::is_temporary_zombie_weapon_minigun );
@@ -67,41 +62,6 @@ is_temporary_zombie_weapon_minigun( weap )
 	
 	disabledetouronce( ::is_temporary_zombie_weapon );
 	return is_temporary_zombie_weapon( weap );
-}
-
-func_should_drop_minigun_tomb()
-{
-	if ( level.total_capture_zones > 0 )
-	{
-		level._tomb_minigun_drop = true;
-	}
-	
-	players = get_players();
-	
-	for ( i = 0; i < players.size; i++ )
-	{
-		if ( players[i].zombie_vars["zombie_powerup_minigun_on"] == 1 )
-		{
-			return false;
-		}
-	}
-
-	if ( flag( "solo_game" ) )
-	{
-		if ( level.solo_lives_given > 0 )
-		{
-			return true;
-		}
-	}
-	else
-	{
-		if ( is_true( level._tomb_minigun_drop ) )
-		{
-			return true;
-		}
-	}
-	
-	return false;
 }
 
 func_should_drop_minigun_prison()
@@ -121,9 +81,8 @@ func_should_drop_minigun_prison()
 		return true;
 	}
 
-	m_door = getent( "powerup_door", "targetname" );
 	
-	if ( is_true( m_door.opened ) || level.n_quest_iteration_count > 1 )
+	if ( level.n_quest_iteration_count > 1 )
 	{
 		return true;
 	}

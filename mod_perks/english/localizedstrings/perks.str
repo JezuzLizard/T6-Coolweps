@@ -5,4 +5,19 @@ FILENOTES           ""
 REFERENCE           ZM_PRISON_PERK_CHERRY
 LANG_ENGLISH        "Hold ^3[{+activate}]^7 to buy Electric Cherry [Cost: &&1]"
 
+REFERENCE           ZM_TOMB_RPB
+LANG_ENGLISH        "Hold ^3[{+activate}]^7 to buy Perk-a-Cola [Cost: &&1]"
+
+REFERENCE           ZM_TOMB_RPE
+LANG_ENGLISH        "Wunderfizz Orb is currently at another location"
+
+REFERENCE           ZM_TOMB_RPP
+LANG_ENGLISH        "Hold ^3[{+activate}]^7 to drink Perk-a-Cola"
+
+REFERENCE           ZM_TOMB_RPT
+LANG_ENGLISH        "You may only carry &&1 perks"
+
+REFERENCE           ZM_TOMB_RPU
+LANG_ENGLISH        "Power must be turned on"
+
 ENDMARKER
