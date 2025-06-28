@@ -5694,6 +5694,122 @@
 "guid" "7A119D3A"
 }
 {
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+"guid" "7A119D3A"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+"guid" "7A119D3A"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+"guid" "7A119D3A"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+"guid" "7A119D3A"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
+"classname" "script_vehicle"
+"vehicletype" "defaultvehicle"
+"model" "defaultvehicle"
+"origin" "-1511.5 -579 -52"
+"targetname" "perk_arrival_vehicle"
+"spawnflags" "0"
+}
+{
 "target" "pf15_auto2911"
 "angles" "0 197.8 0"
 "targetname" "pf15_auto2903"
@@ -11339,4 +11455,22 @@
 "target" "funny_new_perk0"
 "script_int" "11"
 "script_noteworthy" "zm_random_machine"
+}
+{
+"classname" "info_vehicle_node"
+"origin" "-1625.24 79.3768 -64.9197"
+"targetname" "funny_new_perk_arrival_node0"
+"lookahead" "0.5"
+"angles" "0 285 0"
+"guid" "CDA5A79B"
+}
+{
+"lookahead" "0.2"
+"target" "funny_new_perk_arrival_node0"
+"origin" "659.5 13805.5 21869"
+"targetname" "perk_arrival_path_11"
+"spawnflags" "1"
+"classname" "info_vehicle_node"
+"speed" "60"
+"guid" "70755585"
 }

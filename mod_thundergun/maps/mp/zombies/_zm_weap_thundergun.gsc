@@ -298,6 +298,7 @@ thundergun_fling_zombie( player, fling_vec, index )
 	}
 	
 	self DoDamage( self.health + 666, player.origin, player );
+	self setplayercollision( 0 );
 
 	if ( self.health <= 0 )
 	{

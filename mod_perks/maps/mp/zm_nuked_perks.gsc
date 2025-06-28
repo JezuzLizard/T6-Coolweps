@@ -10,8 +10,13 @@
 
 init_nuked_perks()
 {
-	level.perk_arrival_vehicle = getent( "perk_arrival_vehicle", "targetname" );
-	level.perk_arrival_vehicle setmodel( "tag_origin" );
+	level.launch_vehicles_in_use = 0;
+	level.perk_arrival_vehicles = getentarray( "perk_arrival_vehicle", "targetname" );
+	foreach ( veh in level.perk_arrival_vehicles )
+	{
+		veh setmodel( "tag_origin" );
+	}
+	
 	flag_init( "perk_vehicle_bringing_in_perk" );
 	
 	precachemodel( "zm_collision_perks1" );
@@ -30,7 +35,7 @@ init_nuked_perks()
 	_register_nuked_perk( "zombie_vending_tombstone", "specialty_scavenger", "tombstone_light" );
 	_register_nuked_perk( "p6_zm_vending_chugabud", "specialty_finalstand", "tombstone_light" );
 	_register_nuked_perk( "p6_zm_vending_vultureaid", "specialty_nomotionsensor", "vulture_light" );
-	_register_nuked_perk( "p6_zm_vending_diesel_magic", "specialty_stalker", "perk_machine_light" );
+	_register_nuked_perk( "p6_zm_vending_diesel_magic", "specialty_stalker", "perk_machine_light", 1, true );
 	
 	_register_nuked_perk_drop_delay( 3, 5, 30, 60 );
 	_register_nuked_perk_drop_delay( 6, 9, 30, 60 );
@@ -79,6 +84,15 @@ init_nuked_perks()
 	level thread start_zmb_vars();
 }
 
+perks_debug_print( msg )
+{
+	if ( getdvarint( "zm_nuked_test" ) )
+	{
+		print( msg + "\n" );
+		iprintln( msg );
+	}
+}
+
 start_zmb_vars()
 {
 	waittillframeend;
@@ -97,16 +111,38 @@ draw_debug_location()
 wait_for_round_range( start_round, end_round )
 {
 	round_to_spawn = randomintrange( start_round, end_round );
-	
+	perks_debug_print( "Next perk drop round: " + round_to_spawn );
+
 	while ( level.round_number < round_to_spawn )
 	{
 		wait 1;
 	}
 }
 
-bring_perk( machine, trigger )
+_get_available_launch_vehicle()
 {
-	flag_waitopen( "perk_vehicle_bringing_in_perk" );
+	for ( i = 0; i < level.perk_arrival_vehicles.size; i++ )
+	{
+		check_vehicle = level.perk_arrival_vehicles[ i ];
+		if ( !is_true( check_vehicle.in_use ) )
+		{
+			check_vehicle.in_use = true;
+			return check_vehicle;
+		}
+	}
+
+	return undefined;
+}
+
+bring_perk( machine )
+{
+	vehicle = _get_available_launch_vehicle();
+	while ( !isdefined( vehicle ) )
+	{
+		vehicle = _get_available_launch_vehicle();
+		wait 1;
+	}
+	
 	playsoundatposition( "zmb_perks_incoming_quad_front", ( 0, 0, 0 ) );
 	playsoundatposition( "zmb_perks_incoming_alarm", ( -2198, 486, 327 ) );
 	machine setclientfield( "clientfield_perk_intro_fx", 1 );
@@ -116,34 +152,50 @@ bring_perk( machine, trigger )
 	machine.fx.angles = machine.angles;
 	machine.fx setmodel( "tag_origin" );
 	machine.fx linkto( machine );
-	machine linkto( level.perk_arrival_vehicle, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+	machine linkto( vehicle, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
 	start_node = getvehiclenode( "perk_arrival_path_" + machine.script_int, "targetname" );
 /#
-	level.perk_arrival_vehicle thread draw_debug_location();
+	vehicle thread draw_debug_location();
 #/
-	level.perk_arrival_vehicle perk_follow_path( start_node );
+	vehicle perk_follow_path( start_node );
 	machine unlink();
-	scale = level.nuked_perks[ trigger.script_noteworthy ].offset_scale;
+	scale = 1;
+	trigger = undefined;
+	is_wunderfizz = machine.is_wunderfizz;
+	if ( is_wunderfizz )
+	{
+		scale = level.nuked_perks[ "specialty_stalker" ].offset_scale;
+	}
+	else
+	{
+		trigger = getent( machine.targetname, "target" );
+		scale = level.nuked_perks[ trigger.script_noteworthy ].offset_scale;
+	}
+
 	forward_dir = anglestoforward( machine.original_angles + ( 90, -90, 90 ) );
 	offset = vectorscale( forward_dir * -1, scale );
 	
-	is_revive = trigger.script_noteworthy == "specialty_quickrevive";
+	is_revive = false;
+	if ( !is_wunderfizz )
+	{
+		is_revive = trigger.script_noteworthy == "specialty_quickrevive";
+	}
 	
-	if ( isdefined( trigger.blocker_model ) )
+	if ( isdefined( machine.blocker_model ) )
 	{
 		if ( is_revive )
 		{
-			trigger.blocker_model hide();
+			machine.blocker_model hide();
 		}
 		else
 		{
-			if ( isdefined( trigger.blocker_model.clip ) )
+			if ( isdefined( machine.blocker_model.clip ) )
 			{
-				trigger.blocker_model.clip delete ();
-				trigger.blocker_model.clip = undefined;
+				machine.blocker_model.clip delete ();
+				machine.blocker_model.clip = undefined;
 			}
 			
-			trigger.blocker_model delete ();
+			machine.blocker_model delete ();
 		}
 	}
 	
@@ -160,12 +212,15 @@ bring_perk( machine, trigger )
 	machine.fx stoploopsound( 0.5 );
 	machine setclientfield( "clientfield_perk_intro_fx", 0 );
 	playsoundatposition( "zmb_perks_incoming_land", machine.origin );
-	trigger trigger_on();
+	if ( !is_wunderfizz )
+	{
+		trigger trigger_on();
+	}
 	machine thread bring_perk_landing_damage();
 	machine.fx unlink();
 	machine.fx delete ();
 	
-	level notify( "nuked_perk_machine_landed", trigger );
+	level notify( "nuked_perk_machine_landed", machine );
 }
 
 perk_incoming_sound()
@@ -223,9 +278,25 @@ perk_machine_knockdown_zombie( origin )
 	self dodamage( self.health + 100, origin );
 }
 
+_inc_vehicles_in_use()
+{
+	level.launch_vehicles_in_use++;
+}
+
+_dec_vehicles_in_use()
+{
+	level.launch_vehicles_in_use--;
+}
+
 perk_follow_path( node )
 {
-	flag_set( "perk_vehicle_bringing_in_perk" );
+	self.in_use = true;
+	// _inc_vehicles_in_use();
+	// if ( level.launch_vehicles_in_use >= level.perk_arrival_vehicles.size )
+	// {
+	// 	flag_set( "perk_vehicle_bringing_in_perk" );
+	// }
+	
 	self notify( "newpath" );
 	
 	if ( isdefined( node ) )
@@ -244,7 +315,13 @@ perk_follow_path( node )
 	self attachpath( pathstart );
 	self startpath();
 	self waittill( "reached_end_node" );
-	flag_clear( "perk_vehicle_bringing_in_perk" );
+	// _dec_vehicles_in_use();
+	// if ( level.launch_vehicles_in_use < level.perk_arrival_vehicles.size )
+	// {
+	// 	flag_clear( "perk_vehicle_bringing_in_perk" );
+	// }
+
+	self.in_use = false;
 }
 
 turn_perks_on()
@@ -258,25 +335,23 @@ _drop_qr_for_the_noobs( top_height, time, accel )
 	if ( level.players.size == 1 )
 	{
 		forced_quickrevive_nuked_perk_obj = _get_random_remaining_perk_machine( "specialty_quickrevive" );
-		quickrevive_locations = [];
 		quickrevive_structs = getstructarray( "solo_revive", "targetname" );
 		
-		for ( i = 0; i < quickrevive_structs.size; i++ )
-		{
-			quickrevive_locations[ quickrevive_locations.size ] = quickrevive_structs[ i ].script_int;
-		}
+		nuked_perk_location = _get_random_remaining_location( quickrevive_structs );
+		perks_debug_print( "Dropping perk at: " + nuked_perk_location.origin + " script_int: " + nuked_perk_location.script_int );
 		
-		nuked_perk_location = _get_random_remaining_location( quickrevive_locations );
+		perks_debug_print( "Dropping perk: " + forced_quickrevive_nuked_perk_obj.script_noteworthy );
 		
 		quickrevive_trigger = _spawn_perk_machine_from_structs( forced_quickrevive_nuked_perk_obj, nuked_perk_location );
 		quickrevive_machine = quickrevive_trigger.machine;
-		quickrevive_trigger.blocker_model = nuked_perk_location.blocker_model;
+		quickrevive_machine.blocker_model = nuked_perk_location.blocker_model;
 		quickrevive_machine.script_int = nuked_perk_location.script_int;
+		quickrevive_machine.is_wunderfizz = forced_quickrevive_nuked_perk_obj.is_wunderfizz;
 		move_perk( quickrevive_machine, top_height, time, accel );
 		quickrevive_trigger trigger_off();
 		
 		wait 4.0;
-		bring_perk( quickrevive_machine, quickrevive_trigger );
+		level thread bring_perk( quickrevive_machine );
 	}
 }
 
@@ -292,35 +367,58 @@ perks_from_the_sky()
 	
 	_drop_qr_for_the_noobs( top_height, time, accel );
 	
-	for ( i = 0; i < level.nuked_perks.size; i++ )
+	for ( i = 0; ; i++ )
 	{
 		nuked_perk_location = _get_random_remaining_location();
 		
 		if ( !isdefined( nuked_perk_location ) )
 		{
+			perks_debug_print( "Couldn't find a location to drop a perk" );
 			break;
 		}
+
+		perks_debug_print( "Dropping perk at: " + nuked_perk_location.origin + " script_int: " + nuked_perk_location.script_int );
 		
 		nuked_perk = _get_random_remaining_perk_machine();
 		
 		if ( !isdefined( nuked_perk ) )
 		{
+			perks_debug_print( "Couldn't find a remaining perk to drop" );
 			break;
 		}
+
+		perks_debug_print( "Dropping perk: " + nuked_perk.script_noteworthy );
 		
 		if ( !getdvarint( "zm_nuked_test" ) )
 		{
 			_initiate_perk_drop( i );
 		}
 		
-		perk_trigger = _spawn_perk_machine_from_structs( nuked_perk, nuked_perk_location );
-		perk_machine = perk_trigger.machine;
-		perk_trigger.blocker_model = nuked_perk_location.blocker_model;
+		perk_machine = undefined;
+		// wunderfizz
+		if ( nuked_perk.is_wunderfizz )
+		{
+			perk_machine = _spawn_wunderfizz_from_struct( nuked_perk_location );
+		}
+		else
+		{
+			perk_trigger = _spawn_perk_machine_from_structs( nuked_perk, nuked_perk_location );
+			perk_machine = perk_trigger.machine;
+			perk_trigger trigger_off();
+		}
+
+		perk_machine.blocker_model = nuked_perk_location.blocker_model;
 		perk_machine.script_int = nuked_perk_location.script_int;
+		perk_machine.is_wunderfizz = nuked_perk.is_wunderfizz;
 		move_perk( perk_machine, top_height, time, accel );
-		perk_trigger trigger_off();
 		
-		bring_perk( perk_machine, perk_trigger );
+		level thread bring_perk( perk_machine );
+
+		if ( nuked_perk_location.is_last )
+		{
+			perks_debug_print( "No more perks to drop!" );
+			break;
+		}
 	}
 }
 
@@ -347,7 +445,7 @@ _get_blocker_model_for_script_int( script_int )
 	return undefined;
 }
 
-_register_nuked_perk( model, script_noteworthy, perk_fx, position_scale = 1 )
+_register_nuked_perk( model, script_noteworthy, perk_fx, position_scale = 1, is_wunderfizz = false )
 {
 	if ( !isdefined( level.nuked_perks ) )
 	{
@@ -362,10 +460,18 @@ _register_nuked_perk( model, script_noteworthy, perk_fx, position_scale = 1 )
 	new_nuked_perk_obj = spawnstruct();
 	new_nuked_perk_obj.model = model; // const
 	new_nuked_perk_obj.script_noteworthy = script_noteworthy; // const
-	new_nuked_perk_obj.targetname = "zm_perk_machine_override"; // const
+	if ( is_wunderfizz )
+	{
+		new_nuked_perk_obj.targetname = "random_perk_machine"; // const
+	}
+	else
+	{
+		new_nuked_perk_obj.targetname = "zm_perk_machine_override"; // const
+	}
 	new_nuked_perk_obj.perk_fx = perk_fx;
 	new_nuked_perk_obj.has_dropped = false; // mutable
 	new_nuked_perk_obj.offset_scale = position_scale; // const
+	new_nuked_perk_obj.is_wunderfizz = is_wunderfizz;
 	level.nuked_perks[ script_noteworthy ] = new_nuked_perk_obj;
 }
 
@@ -422,24 +528,52 @@ _initiate_perk_drop( delay_index )
 	time_min = level.nuked_perk_drop_delays[ delay_index ].time_min;
 	time_max = level.nuked_perk_drop_delays[ delay_index ].time_max;
 	wait_for_round_range( round_min, round_max );
-	wait( randomintrange( time_min, time_max ) );
+
+	wait_time = randomintrange( time_min, time_max );
+	perks_debug_print( "Perk drops in: " + wait_time + " seconds" );
+	wait( wait_time );
 }
 
-_get_random_remaining_location( forced_script_ints_array = undefined )
+_get_random_remaining_location( forced_structs = undefined )
 {
-	if ( array_validate( forced_script_ints_array ) )
+	if ( array_validate( forced_structs ) )
 	{
-		forced_script_ints_array_keys = array_randomize( getarraykeys( forced_script_ints_array ) );
+		forced_structs_rand = array_randomize( forced_structs );
 		
-		for ( j = 0; j < forced_script_ints_array_keys.size; j++ )
+		picked_location = undefined;
+		for ( i = 0; i < forced_structs_rand.size; i++ )
 		{
-			location = level.nuked_perk_drop_locations[ forced_script_ints_array[ forced_script_ints_array_keys[ j ] ] ];
+			forced_struct = forced_structs_rand[ i ]; 
+			location = level.nuked_perk_drop_locations[ forced_struct.script_int ];
 			
 			if ( !location.has_been_used )
 			{
 				location.has_been_used = true;
-				return location;
+				if ( !isdefined( picked_location ) )
+				{
+					picked_location = location;
+				}
+
+				if ( getdvarint( "solo_revive_only_perk_in_first_room" ) )
+				{
+					if ( flag( "solo_game" ) && isdefined( forced_struct.targetname ) && forced_struct.targetname == "solo_revive" )
+					{
+						perks_debug_print( "Using revive solo only perk in first room logic" );
+						continue; // keep going to mark all first room locations as used
+					}
+				}
+
+				return picked_location;
 			}
+		}
+
+		if ( isdefined( picked_location ) )
+		{
+			return picked_location;
+		}
+		else
+		{
+			assert( false );
 		}
 	}
 	
@@ -464,6 +598,7 @@ _get_random_remaining_location( forced_script_ints_array = undefined )
 		if ( !location.has_been_used )
 		{
 			location.has_been_used = true;
+			location.is_last = false;
 			
 			if ( spots_used >= locations.size - 1 )
 			{
@@ -556,19 +691,32 @@ _power_on_perk()
 	self set_power_on( 1 );
 }
 
+prevent_wunderfizz_move()
+{
+	wait 1;
+	self.num_til_moved = ( 1 << 31 ) - 1;
+	self.is_locked = false;
+}
+
 _power_on_dropped_machines()
 {
 	level endon( "end_game" );
 	
+	perks_dropped = 0;
 	for ( ;; )
 	{
-		level waittill( "nuked_perk_machine_landed", perk_trigger );
+		level waittill( "nuked_perk_machine_landed", perk_machine );
 		
 		// wunderfizz
-		if ( perk_trigger.script_noteworthy == "specialty_stalker" )
+		if ( perk_machine.is_wunderfizz )
 		{
+			level thread maps\mp\zombies\_zm_perk_random::init_machines();
+			level thread maps\mp\zombies\_zm_perk_random::start_random_machine();
+			perk_machine thread prevent_wunderfizz_move();
 			continue;
 		}
+
+		perk_trigger = getent( perk_machine.targetname, "target" );
 		
 		if ( perk_trigger.script_noteworthy == "specialty_weapupgrade" )
 		{
@@ -577,6 +725,17 @@ _power_on_dropped_machines()
 		}
 		
 		perk_trigger thread _power_on_perk();
+
+		perks_dropped++;
+		if ( perks_dropped == level.nuked_perks.size )
+		{
+			break;
+		}
+	}
+
+	foreach ( veh in level.perk_arrival_vehicles )
+	{
+		veh delete();
 	}
 }
 
@@ -840,4 +999,25 @@ _spawn_perk_machine( specialty_perk, model, origin, angles, blocker_model = unde
 	}
 	
 	return use_trigger;
+}
+
+_spawn_wunderfizz_from_struct( location_struct )
+{
+	origin = location_struct.origin;
+	angles = location_struct.angles;
+	blocker_model = location_struct.blocker_model;
+	return _spawn_wunderfizz( origin, angles, blocker_model );
+}
+
+_spawn_wunderfizz( origin, angles, blocker_model )
+{
+	wunderfizz = spawn( "script_model", origin );
+	wunderfizz.angles = angles;
+	wunderfizz.targetname = "random_perk_machine";
+	wunderfizz.script_noteworthy = "start_machine";
+	wunderfizz setmodel("p6_zm_vending_diesel_magic");
+	wunderfizz.is_locked = 1;
+	collision = scripts\zm\perks::spawn_blocker_collision( origin, angles );
+
+	return wunderfizz;
 }
