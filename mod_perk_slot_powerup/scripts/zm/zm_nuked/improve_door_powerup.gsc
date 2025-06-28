@@ -10,11 +10,13 @@ main()
 door_powerup_drop( powerup_name, drop_spot, powerup_team, powerup_location )
 {
 	if ( isdefined( level.door_powerup ) )
+	{
 		level.door_powerup powerup_delete();
-
+	}
+	
 	powerup = maps\mp\zombies\_zm_net::network_safe_spawn( "powerup", 1, "script_model", drop_spot + vectorscale( ( 0, 0, 1 ), 40.0 ) );
 	level notify( "powerup_dropped", powerup );
-
+	
 	if ( isdefined( powerup ) )
 	{
 		powerup.grabbed_level_notify = "magic_door_power_up_grabbed";
@@ -59,22 +61,25 @@ on_round_over()
 perks_behind_door_override()
 {
 	if ( !is_true( level.enable_magic ) )
+	{
 		return;
-
+	}
+	
 	flag_wait( "initial_blackscreen_passed" );
 	reset_door_powerup_list();
 	ammodrop = getstruct( "zm_nuked_ammo_drop", "script_noteworthy" );
 	
 	door_powerup_drop( level.door_powerup_drop_list[ 0 ], ammodrop.origin );
-
+	
 	_reset_powerup_requirement();
 	level thread on_round_over();
-
+	
 	while ( true )
 	{
 		level waittill( "nuke_clock_moved" );
-
+		
 		level.door_powerup_clock_moves_this_round++;
+		
 		if ( ( level.door_powerup_clock_moves_this_round % 3 ) != 0 )
 		{
 			// if they didn't pick it up, cycle it
@@ -82,19 +87,20 @@ perks_behind_door_override()
 			{
 				_powerup_drop( ammodrop );
 			}
+			
 			continue;
 		}
-
+		
 		level.door_powerup_clock_chimes_this_round++;
-
+		
 		if ( level.door_powerup_clock_chimes_this_round < level.door_powerup_clock_moves_required )
 		{
 			continue;
 		}
-
+		
 		level.door_powerup_clock_moves_required++;
 		level.door_powerup_clock_chimes_this_round = 0;
-
+		
 		_powerup_drop( ammodrop );
 	}
 }
