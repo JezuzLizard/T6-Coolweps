@@ -54663,3 +54663,37 @@
 "targetname" "zm_perk_machine"
 "script_string" "zstandard_perks_transit"
 }
+{
+"script_noteworthy" "start_machine"
+"targetname" "random_perk_machine"
+"origin" "-3574 -7211 -58"
+"angles" "0 0 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "zclassic_perks_transit"
+}
+{
+"script_noteworthy" "start_machine"
+"targetname" "random_perk_machine"
+"origin" "13566 -1349 -188"
+"angles" "0 90 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "zclassic_perks_transit"
+}
+{
+"targetname" "random_perk_machine"
+"origin" "11397 7813 -534"
+"angles" "0 270 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "zclassic_perks_transit"
+}
+{
+"targetname" "random_perk_machine"
+"origin" "5401 6588 -24"
+"angles" "0 270 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "zclassic_perks_transit"
+}
