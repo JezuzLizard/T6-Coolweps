@@ -34,12 +34,16 @@ def main():
 			output_text = json.dumps(dict_data, indent=4, sort_keys=args.sort)
 		elif args.mode == 'fromjson':
 			dict_data = json.loads(input_text)
+			dict_data_sorted = dict_data
+
+			if args.sort:
+				dict_data_sorted = dict(sorted(dict_data.items()))
 			
-			if '__HEADERMAGIC__' not in dict_data:
+			if '__HEADERMAGIC__' not in dict_data_sorted:
 				raise ValueError('Input JSON does not contain the required magic header.')
 			
-			output_text += dict_data['__HEADERMAGIC__']
-			for key, value in dict_data.items():
+			output_text += dict_data_sorted['__HEADERMAGIC__']
+			for key, value in dict_data_sorted.items():
 				if key != '__HEADERMAGIC__':
 					output_text += '\\' + key + '\\' + value
 
