@@ -66,6 +66,27 @@ init()
 			}
 		}
 	}
+	
+	// fix jingle for phd
+	if ( level.script != "zm_prison" && is_specialty_in_use( "specialty_flakjacket" ) )
+	{
+		level._custom_perks[ "specialty_flakjacket" ].perk_machine_set_kvps = ::fix_flakjacket_jingle;
+	}
+}
+
+fix_flakjacket_jingle( use_trigger, perk_machine, bump_trigger, collision )
+{
+	use_trigger.script_sound = "mus_perks_phdflopper_jingle";
+	use_trigger.script_string = "divetonuke_perk";
+	use_trigger.script_label = "mus_perks_phdflopper_sting";
+	use_trigger.target = "vending_divetonuke";
+	perk_machine.script_string = "divetonuke_perk";
+	perk_machine.targetname = "vending_divetonuke";
+	
+	if ( isdefined( bump_trigger ) )
+	{
+		bump_trigger.script_string = "divetonuke_perk";
+	}
 }
 
 is_specialty_in_use( perk )

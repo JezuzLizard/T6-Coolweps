@@ -14,6 +14,7 @@ include,perks/wunderfizz
 
 script,scripts/zm/perks.csc
 localize,perks
+soundbank,perks.all
 
 // electric_cherry anims
 rawfile,animstatedefs/zm_buried_basic.asd

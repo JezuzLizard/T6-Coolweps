@@ -18,5 +18,6 @@ zmStats
 *.7z
 zone_dump/
 scriptdata/
+sound_studio/
 partclassification.csv
 partclassification_mp.csv

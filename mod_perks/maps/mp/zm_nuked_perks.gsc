@@ -669,6 +669,12 @@ _power_on_perk()
 
 _power_on_wunderfizz()
 {
+	if ( self.script_int == 6 )
+	{
+		self.origin += ( 0, 0, 10 );
+	}
+
+	wait 0.05;
 	level thread maps\mp\zombies\_zm_perk_random::init_machines();
 	level thread maps\mp\zombies\_zm_perk_random::start_random_machine();
 	wait 1;
