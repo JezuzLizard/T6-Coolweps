@@ -11,8 +11,6 @@ main()
 	level.zombiemode_using_additionalprimaryweapon_perk = 1;
 	level.zombiemode_using_deadshot_perk = 1;
 	
-	// is_gametype_active zclassic zgrief
-	
 	level.zombiemode_using_divetonuke_perk = 1;
 	maps\mp\zombies\_zm_perk_divetonuke::enable_divetonuke_perk_for_level();
 	replacefunc( maps\mp\zombies\_zm_perk_divetonuke::init_divetonuke, ::noop );
@@ -31,6 +29,7 @@ main()
 	
 	if ( level.script != "zm_nuked" && level.script != "zm_tomb" )
 	{
+		gamemode_random_perk();
 		level thread maps\mp\zombies\_zm_perk_random::start_random_machine();
 	}
 	
@@ -65,12 +64,6 @@ init()
 				maps\mp\zombies\_zm_perk_random::include_perk_in_random_rotation( perk );
 			}
 		}
-	}
-	
-	// fix jingle for phd
-	if ( level.script != "zm_prison" && is_specialty_in_use( "specialty_flakjacket" ) )
-	{
-		level._custom_perks[ "specialty_flakjacket" ].perk_machine_set_kvps = ::fix_flakjacket_jingle;
 	}
 }
 
@@ -184,7 +177,7 @@ listen_for_afterlife_box_power_random_perk( num )
 	
 	foreach ( machine_ in machines )
 	{
-		if ( machine_.script_string == "random_perk_machine" + num )
+		if ( machine_.target == "random_perk_machine" + num )
 		{
 			machine = machine_;
 			break;
@@ -219,6 +212,12 @@ turn_random_perk_on_with_power()
 
 perk_machine_spawn_init_hook()
 {
+	// fix jingle for phd
+	if ( level.script != "zm_prison" && is_specialty_in_use( "specialty_flakjacket" ) )
+	{
+		level._custom_perks[ "specialty_flakjacket" ].perk_machine_set_kvps = ::fix_flakjacket_jingle;
+	}
+	
 	disabledetouronce( maps\mp\zombies\_zm_perks::perk_machine_spawn_init );
 	maps\mp\zombies\_zm_perks::perk_machine_spawn_init();
 	
@@ -550,6 +549,40 @@ mod_vending_precache()
 		if ( isdefined( level.machine_assets[ keys[ i ] ].weapon ) )
 		{
 			precacheitem( level.machine_assets[ keys[ i ] ].weapon );
+		}
+	}
+}
+
+gamemode_random_perk()
+{
+	match_string = "";
+	location = level.scr_zm_map_start_location;
+	
+	if ( ( location == "default" || location == "" ) && isdefined( level.default_start_location ) )
+	{
+		location = level.default_start_location;
+	}
+	
+	match_string = level.scr_zm_ui_gametype + "_perks_" + location;
+	machines = getentarray( "random_perk_machine", "targetname" );
+	
+	foreach ( machine in machines )
+	{
+		tokens = strtok( machine.script_string, " " );
+		found = false;
+		
+		foreach ( token in tokens )
+		{
+			if ( token == match_string )
+			{
+				found = true;
+				break;
+			}
+		}
+		
+		if ( !found )
+		{
+			machine delete ();
 		}
 	}
 }

@@ -21182,7 +21182,8 @@
 "angles" "0 90 0"
 "model" "p6_zm_vending_diesel_magic"
 "classname" "script_model"
-"script_string" "random_perk_machine0"
+"target" "random_perk_machine0"
+"script_string" "zclassic_perks_prison"
 }
 {
 "origin" "333 10255 1337"
@@ -21201,7 +21202,8 @@
 "angles" "0 10 0"
 "model" "p6_zm_vending_diesel_magic"
 "classname" "script_model"
-"script_string" "random_perk_machine1"
+"target" "random_perk_machine1"
+"script_string" "zclassic_perks_prison"
 }
 {
 "origin" "-590 6159 -41"
@@ -21220,7 +21222,8 @@
 "angles" "0 180 0"
 "model" "p6_zm_vending_diesel_magic"
 "classname" "script_model"
-"script_string" "random_perk_machine2"
+"target" "random_perk_machine2"
+"script_string" "zclassic_perks_prison"
 }
 {
 "origin" "2201 9296 1557"
