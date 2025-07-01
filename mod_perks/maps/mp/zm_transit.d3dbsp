@@ -54646,3 +54646,20 @@
 "classname" "script_model"
 "script_string" "zstandard_perks_farm zgrief_perks_farm"
 }
+{
+"targetname" "random_perk_machine"
+"origin" "-6291 5451 -55"
+"angles" "0 90 0"
+"model" "p6_zm_vending_diesel_magic"
+"classname" "script_model"
+"script_string" "zclassic_perks_transit zstandard_perks_transit"
+}
+{
+"origin" "-7422 4174 -63"
+"model" "zombie_vending_three_gun"
+"classname" "script_struct"
+"angles" "0 180 0"
+"script_noteworthy" "specialty_additionalprimaryweapon"
+"targetname" "zm_perk_machine"
+"script_string" "zstandard_perks_transit"
+}

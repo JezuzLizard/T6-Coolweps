@@ -208,6 +208,16 @@ turn_random_perk_on_with_power()
 	{
 		machine.is_locked = 0;
 	}
+	
+	wait 5;
+	
+	foreach ( machine in machines )
+	{
+		if ( is_true( machine.never_moves ) )
+		{
+			machine.num_til_moved = ( 1 << 31 ) - 1;
+		}
+	}
 }
 
 perk_machine_spawn_init_hook()
@@ -583,6 +593,13 @@ gamemode_random_perk()
 		if ( !found )
 		{
 			machine delete ();
+			continue;
+		}
+		
+		if ( level.script == "zm_transit" && location == "transit" && level.scr_zm_ui_gametype == "zstandard" )
+		{
+			machine.script_noteworthy = "start_machine";
+			machine.never_moves = true;
 		}
 	}
 }
