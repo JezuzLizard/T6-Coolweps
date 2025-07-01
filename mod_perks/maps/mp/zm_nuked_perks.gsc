@@ -243,15 +243,14 @@ bring_perk_landing_damage()
 	radiusdamage( self.origin, player_prone_damage_radius, 10, 5, undefined, "MOD_EXPLOSIVE" );
 	exploder( 500 + self.script_int );
 	exploder( 511 );
-	players = get_players();
 	
-	for ( i = 0; i < players.size; i++ )
+	for ( i = 0; i < level.players.size; i++ )
 	{
-		if ( distancesquared( players[i].origin, self.origin ) <= player_prone_damage_radius * player_prone_damage_radius )
+		if ( distancesquared( level.players[i].origin, self.origin ) <= player_prone_damage_radius * player_prone_damage_radius )
 		{
-			players[i] setstance( "prone" );
-			players[i] shellshock( "default", 1.5 );
-			radiusdamage( players[i].origin, player_prone_damage_radius / 2, 10, 5, undefined, "MOD_EXPLOSIVE" );
+			level.players[i] setstance( "prone" );
+			level.players[i] shellshock( "default", 1.5 );
+			radiusdamage( level.players[i].origin, player_prone_damage_radius / 2, 10, 5, undefined, "MOD_EXPLOSIVE" );
 		}
 	}
 	
@@ -318,7 +317,7 @@ turn_perks_on()
 
 _drop_qr_for_the_noobs( top_height, time, accel )
 {
-	if ( level.players.size == 1 )
+	if ( flag( "solo_game" ) )
 	{
 		forced_quickrevive_nuked_perk_obj = _get_random_remaining_perk_machine( "specialty_quickrevive" );
 		quickrevive_structs = getstructarray( "solo_revive", "targetname" );
@@ -531,7 +530,7 @@ _get_random_remaining_location( forced_structs = undefined )
 					picked_location = location;
 				}
 				
-				if ( getdvarint( "zm_nuked_solo_revive_only_perk_in_first_room" ) )
+				if ( !getdvarint( "zm_nuked_solo_all_perks_first_room" ) && !getdvarint( "zm_nuked_test" ) )
 				{
 					if ( flag( "solo_game" ) && isdefined( forced_struct.targetname ) && forced_struct.targetname == "solo_revive" )
 					{
