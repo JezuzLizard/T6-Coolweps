@@ -37,28 +37,24 @@ init_nuked_perks()
 	_register_nuked_perk( "p6_zm_vending_vultureaid", "specialty_nomotionsensor", "vulture_light" );
 	_register_nuked_perk( "p6_zm_vending_diesel_magic", "specialty_stalker", "perk_machine_light" );
 	
-	_register_nuked_perk_drop_delay( 3, 5, 30, 60 );
-	_register_nuked_perk_drop_delay( 6, 9, 30, 60 );
-	
-	_register_nuked_perk_drop_delay( 10, 14, 60, 120 );
-	_register_nuked_perk_drop_delay( 15, 19, 60, 120 );
-	_register_nuked_perk_drop_delay( 20, 25, 60, 120 );
-	
-	_register_nuked_perk_drop_delay( 26, 27, 90, 180 );
-	_register_nuked_perk_drop_delay( 28, 29, 90, 180 );
-	_register_nuked_perk_drop_delay( 30, 31, 90, 180 );
-	
-	_register_nuked_perk_drop_delay( 32, 33, 120, 240 );
-	_register_nuked_perk_drop_delay( 34, 35, 120, 240 );
-	_register_nuked_perk_drop_delay( 36, 37, 120, 240 );
-	
-	_register_nuked_perk_drop_delay( 38, 39, 150, 300 );
-	_register_nuked_perk_drop_delay( 40, 41, 150, 300 );
-	_register_nuked_perk_drop_delay( 42, 43, 150, 300 );
-	
-	_register_nuked_perk_drop_delay( 44, 45, 180, 360 );
+	_register_nuked_perk_drop_delay( 3, 5, 30, 60, 1 );
+	_register_nuked_perk_drop_delay( 6, 9, 30, 60, 1 );
+	_register_nuked_perk_drop_delay( 10, 14, 60, 120, 1 );
+	_register_nuked_perk_drop_delay( 15, 19, 60, 120, 1 );
+	_register_nuked_perk_drop_delay( 20, 25, 60, 120, 1 );
+	_register_nuked_perk_drop_delay( 26, 27, 90, 180, 2 );
+	_register_nuked_perk_drop_delay( 28, 29, 90, 180, 2 );
+	_register_nuked_perk_drop_delay( 30, 31, 90, 180, 2 );
+	_register_nuked_perk_drop_delay( 32, 33, 120, 240, 2 );
+	_register_nuked_perk_drop_delay( 34, 35, 120, 240, 3 );
+	_register_nuked_perk_drop_delay( 36, 37, 120, 240, 3 );
+	_register_nuked_perk_drop_delay( 38, 39, 150, 300, 3 );
+	_register_nuked_perk_drop_delay( 40, 41, 150, 300, 3 );
+	_register_nuked_perk_drop_delay( 42, 43, 150, 300, 3 );
+	_register_nuked_perk_drop_delay( 44, 45, 180, 360, 4 );
 	
 	initialize_custom_perk_arrays();
+	thread inc_faux_round();
 	
 	perk_structs = getstructarray( "zm_random_machine", "script_noteworthy" );
 	
@@ -103,9 +99,20 @@ start_zmb_vars()
 
 draw_debug_location()
 {
-	/#
-		
-	#/
+/#
+	
+#/
+}
+
+inc_faux_round()
+{
+	level.nuked_faux_round = 0;
+	
+	for ( ;; )
+	{
+		level waittill( "between_round_over" );
+		level.nuked_faux_round++;
+	}
 }
 
 wait_for_round_range( start_round, end_round )
@@ -113,7 +120,7 @@ wait_for_round_range( start_round, end_round )
 	round_to_spawn = randomintrange( start_round, end_round );
 	perks_debug_print( "Next perk drop round: " + round_to_spawn );
 	
-	while ( level.round_number < round_to_spawn )
+	while ( level.nuked_faux_round < round_to_spawn )
 	{
 		wait 1;
 	}
@@ -156,9 +163,9 @@ bring_perk( machine )
 	machine.fx linkto( machine );
 	machine linkto( vehicle, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
 	start_node = getvehiclenode( "perk_arrival_path_" + machine.script_int, "targetname" );
-	/#
-		vehicle thread draw_debug_location();
-	#/
+/#
+	vehicle thread draw_debug_location();
+#/
 	vehicle perk_follow_path( start_node );
 	machine unlink();
 	scale = 1;
@@ -469,7 +476,7 @@ _register_perk_random_location( sky_struct )
 	level.nuked_perk_drop_locations[ new_perk_location_obj.script_int ] = new_perk_location_obj;
 }
 
-_register_nuked_perk_drop_delay( round_min, round_max, time_min, time_max, early_drop_notify = undefined )
+_register_nuked_perk_drop_delay( round_min, round_max, time_min, time_max, chimes_to_spawn, early_drop_notify = undefined )
 {
 	if ( !isdefined( level.nuked_perk_drop_delays ) )
 	{
@@ -481,6 +488,7 @@ _register_nuked_perk_drop_delay( round_min, round_max, time_min, time_max, early
 	new_nuked_drop_delay_obj.round_max = round_max;
 	new_nuked_drop_delay_obj.time_min = time_min;
 	new_nuked_drop_delay_obj.time_max = time_max;
+	new_nuked_drop_delay_obj.chimes_to_spawn = chimes_to_spawn;
 	
 	if ( isdefined( early_drop_notify ) )
 	{
@@ -501,7 +509,55 @@ _initiate_perk_drop( delay_index )
 	round_max = level.nuked_perk_drop_delays[ delay_index ].round_max;
 	time_min = level.nuked_perk_drop_delays[ delay_index ].time_min;
 	time_max = level.nuked_perk_drop_delays[ delay_index ].time_max;
-	wait_for_round_range( round_min, round_max );
+	chimes_to_spawn = level.nuked_perk_drop_delays[ delay_index ].chimes_to_spawn;
+	
+	if ( level.players.size > 2 )
+	{
+		clock_ticks = 0;
+		chimes = 0;
+		
+		while ( true )
+		{
+			level waittill( "nuke_clock_moved" );
+			
+			clock_ticks++;
+			
+			if ( ( clock_ticks % 4 ) != 0 )
+			{
+				continue;
+			}
+			
+			chimes++;
+			
+			if ( chimes >= chimes_to_spawn )
+			{
+				break;
+			}
+		}
+	}
+	else
+	{
+		if ( !flag( "solo_game" ) )
+		{
+			if ( cointoss() )
+			{
+				level.nuked_faux_round++;
+			}
+		}
+
+		if ( round_min > 25 )
+		{
+			if ( cointoss() )
+			{
+				level.nuked_faux_round++;
+			}
+			
+			round_min -= 5;
+			round_max -= 5;
+		}
+
+		wait_for_round_range( round_min, round_max );
+	}
 	
 	wait_time = randomintrange( time_min, time_max );
 	perks_debug_print( "Perk drops in: " + wait_time + " seconds" );
@@ -547,7 +603,7 @@ _get_random_remaining_location( forced_structs = undefined )
 		{
 			return picked_location;
 		}
-
+		
 		assert( false );
 		return undefined;
 	}
@@ -672,7 +728,7 @@ _power_on_wunderfizz()
 	{
 		self.origin += ( 0, 0, 10 );
 	}
-
+	
 	wait 0.05;
 	level thread maps\mp\zombies\_zm_perk_random::init_machines();
 	level thread maps\mp\zombies\_zm_perk_random::start_random_machine();

@@ -7,11 +7,30 @@ main()
 	replacefunc( maps\mp\zm_nuked::perks_behind_door, ::perks_behind_door_override );
 }
 
+perks_debug_print( msg )
+{
+	if ( getdvarint( "zm_nuked_test" ) )
+	{
+		print( msg + "\n" );
+		iprintln( msg );
+	}
+}
+
 door_powerup_drop( powerup_name, drop_spot, powerup_team, powerup_location )
 {
+	if ( is_true( level.door_powerup_spawning ) )
+	{
+		assert( false );
+		perks_debug_print( "door_powerup_drop: already spawning a powerup, aborting." );
+		return;
+	}
+	
+	level.door_powerup_spawning = true;
+	
 	if ( isdefined( level.door_powerup ) )
 	{
 		level.door_powerup powerup_delete();
+		level.door_powerup = undefined;
 	}
 	
 	powerup = maps\mp\zombies\_zm_net::network_safe_spawn( "powerup", 1, "script_model", drop_spot + vectorscale( ( 0, 0, 1 ), 40.0 ) );
@@ -22,7 +41,9 @@ door_powerup_drop( powerup_name, drop_spot, powerup_team, powerup_location )
 		powerup.grabbed_level_notify = "magic_door_power_up_grabbed";
 		playfx( level._effect["lightning_dog_spawn"], powerup.origin );
 		playsoundatposition( "pre_spawn", powerup.origin );
+		
 		wait 1.5;
+		
 		playsoundatposition( "zmb_bolt", powerup.origin );
 		earthquake( 0.5, 0.75, powerup.origin, 1000 );
 		playrumbleonposition( "explosion_generic", powerup.origin );
@@ -33,6 +54,8 @@ door_powerup_drop( powerup_name, drop_spot, powerup_team, powerup_location )
 		powerup thread maps\mp\zombies\_zm_powerups::powerup_move();
 		level.door_powerup = powerup;
 	}
+	
+	level.door_powerup_spawning = undefined;
 }
 
 reset_door_powerup_list()
@@ -44,9 +67,8 @@ reset_door_powerup_list()
 
 _reset_powerup_requirement()
 {
-	level.door_powerup_clock_moves_this_round = 0;
-	level.door_powerup_clock_moves_required = 1;
-	level.door_powerup_clock_chimes_this_round = 0;
+	level.door_powerup_clock_chimes_required = 1;
+	level.door_powerup_clock_chimes_for_reward = 0;
 }
 
 on_round_over()
@@ -73,33 +95,35 @@ perks_behind_door_override()
 	
 	_reset_powerup_requirement();
 	level thread on_round_over();
+	level.door_powerup_clock_ticks = 0;
 	
 	while ( true )
 	{
 		level waittill( "nuke_clock_moved" );
 		
-		level.door_powerup_clock_moves_this_round++;
+		level.door_powerup_clock_ticks++;
 		
-		if ( ( level.door_powerup_clock_moves_this_round % 3 ) != 0 )
+		// every 4 ticks is a chime, just a tick
+		if ( ( level.door_powerup_clock_ticks % 4 ) != 0 )
 		{
 			// if they didn't pick it up, cycle it
 			if ( isdefined( level.door_powerup ) )
 			{
 				_powerup_drop( ammodrop );
 			}
-			
+
 			continue;
 		}
 		
-		level.door_powerup_clock_chimes_this_round++;
+		level.door_powerup_clock_chimes_for_reward++;
 		
-		if ( level.door_powerup_clock_chimes_this_round < level.door_powerup_clock_moves_required )
+		if ( level.door_powerup_clock_chimes_for_reward < level.door_powerup_clock_chimes_required )
 		{
 			continue;
 		}
 		
-		level.door_powerup_clock_moves_required++;
-		level.door_powerup_clock_chimes_this_round = 0;
+		level.door_powerup_clock_chimes_required++;
+		level.door_powerup_clock_chimes_for_reward = 0;
 		
 		_powerup_drop( ammodrop );
 	}
