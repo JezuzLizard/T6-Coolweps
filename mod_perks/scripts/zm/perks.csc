@@ -4,6 +4,8 @@
 
 main()
 {
+	level.script = getdvar( "mapname" );
+	
 	level.zombiemode_using_marathon_perk = 1;
 	level.zombiemode_using_additionalprimaryweapon_perk = 1;
 	level.zombiemode_using_deadshot_perk = 1;
@@ -16,14 +18,26 @@ main()
 	
 	level._effect["bottle_glow"] = loadfx( "maps/zombie_tomb/fx_tomb_dieselmagic_portal" );
 	level.zombiemode_using_random_perk = 1;
-	clientscripts\mp\zombies\_zm_perk_random::init();
-	clientscripts\mp\zombies\_callbacks::onfinalizeinitialization_callback( ::finalize_initialization );
+	
+	if ( level.script != "zm_tomb" )
+	{
+		clientscripts\mp\zombies\_zm_perk_random::init();
+	}
+}
+
+init()
+{
+	[[ level.on_finalize_initialization_callback ]]( ::finalize_initialization );
 }
 
 delay_init()
 {
 	wait 0.05;
-	clientscripts\mp\zombies\_zm_perk_random::init_animtree();
+	
+	if ( level.script != "zm_tomb" )
+	{
+		clientscripts\mp\zombies\_zm_perk_random::init_animtree();
+	}
 }
 
 finalize_initialization()

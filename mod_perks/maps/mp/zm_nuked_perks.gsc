@@ -106,7 +106,10 @@ draw_debug_location()
 
 inc_faux_round()
 {
-	level.nuked_faux_round = 0;
+	level.nuked_faux_round = level.round_number;
+	flag_wait( "initial_blackscreen_passed" );
+	wait 1;
+	level.nuked_faux_round = level.round_number;
 	
 	for ( ;; )
 	{
@@ -513,16 +516,14 @@ _initiate_perk_drop( delay_index )
 	
 	if ( level.players.size > 2 )
 	{
-		clock_ticks = 0;
+		min_hand_model = getent( "clock_min_hand", "targetname" );
 		chimes = 0;
 		
 		while ( true )
 		{
 			level waittill( "nuke_clock_moved" );
 			
-			clock_ticks++;
-			
-			if ( ( clock_ticks % 4 ) != 0 )
+			if ( min_hand_model.position != 3 )
 			{
 				continue;
 			}
@@ -724,7 +725,7 @@ _power_on_perk()
 
 _power_on_wunderfizz()
 {
-	if ( self.script_int == 6 )
+	if ( self.script_int == 6 || self.script_int == 9 )
 	{
 		self.origin += ( 0, 0, 10 );
 	}

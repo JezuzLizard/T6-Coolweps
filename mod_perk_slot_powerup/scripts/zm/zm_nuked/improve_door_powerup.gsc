@@ -95,16 +95,14 @@ perks_behind_door_override()
 	
 	_reset_powerup_requirement();
 	level thread on_round_over();
-	level.door_powerup_clock_ticks = 0;
+	min_hand_model = getent( "clock_min_hand", "targetname" );
 	
 	while ( true )
 	{
 		level waittill( "nuke_clock_moved" );
 		
-		level.door_powerup_clock_ticks++;
-		
 		// every 4 ticks is a chime, just a tick
-		if ( ( level.door_powerup_clock_ticks % 4 ) != 0 )
+		if ( min_hand_model.position != 3 )
 		{
 			// if they didn't pick it up, cycle it
 			if ( isdefined( level.door_powerup ) )
