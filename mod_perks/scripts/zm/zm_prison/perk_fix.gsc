@@ -4,7 +4,10 @@
 
 main()
 {
-	replaceFunc( maps\mp\zm_prison_sq_bg::take_old_weapon_and_give_reward, ::take_old_weapon_and_give_reward );
+	if ( is_gametype_active( "zclassic" ) )
+	{
+		replaceFunc( maps\mp\zm_prison_sq_bg::take_old_weapon_and_give_reward, ::take_old_weapon_and_give_reward );
+	}
 }
 
 take_old_weapon_and_give_reward( current_weapon, reward_weapon, weapon_limit_override )
