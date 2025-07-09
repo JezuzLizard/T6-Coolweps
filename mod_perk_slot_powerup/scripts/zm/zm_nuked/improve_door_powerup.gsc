@@ -20,7 +20,6 @@ door_powerup_drop( powerup_name, drop_spot, powerup_team, powerup_location )
 {
 	if ( is_true( level.door_powerup_spawning ) )
 	{
-		assert( false );
 		perks_debug_print( "door_powerup_drop: already spawning a powerup, aborting." );
 		return;
 	}
