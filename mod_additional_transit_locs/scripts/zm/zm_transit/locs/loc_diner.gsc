@@ -3,32 +3,20 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 #include maps\mp\zombies\_zm;
-#include maps\mp\gametypes_zm\_zm_gametype;
-
 #include scripts\zm\_gametype_setup;
 
 struct_init()
 {
 	if ( !is_true( level.ctsm_disable_custom_perk_locations ) )
 	{
-		register_perk_struct( "specialty_armorvest", "zombie_vending_jugg", ( 0, 176, 0 ), ( -3634, -7464, -58 ) );
-		register_perk_struct( "specialty_rof", "zombie_vending_doubletap2", ( 0, 270, 0 ), (-4591.74 + 12.5, -7755.04, -40.5759) );
-		register_perk_struct( "specialty_longersprint", "zombie_vending_marathon", ( 0, 4, 0 ), ( -4576, -6704, -61 ) );
-		register_perk_struct( "specialty_scavenger", "zombie_vending_tombstone", ( 0, 90, 0 ), ( -6496, -7691, 0 ) );
-		register_perk_struct( "specialty_weapupgrade", "p6_anim_zm_buildable_pap_on", ( 0, 175, 0 ), ( -6351, -7778, 227 ) );
-		register_perk_struct( "specialty_quickrevive", "zombie_vending_quickrevive", ( 0, 270, 0 ), ( -4170 - 12.5, -7610, -61 ) );
-		register_perk_struct( "specialty_fastreload", "zombie_vending_sleight", ( 0, 270, 0 ), ( -5470, -7859.5, 0 ) );
+		scripts\zm\_gametype_setup::register_perk_struct( "specialty_armorvest", "zombie_vending_jugg", ( 0, 176, 0 ), ( -3634, -7464, -58 ) );
+		scripts\zm\_gametype_setup::register_perk_struct( "specialty_rof", "zombie_vending_doubletap2", ( 0, 270, 0 ), (-4591.74 + 12.5, -7755.04, -40.5759) );
+		scripts\zm\_gametype_setup::register_perk_struct( "specialty_longersprint", "zombie_vending_marathon", ( 0, 4, 0 ), ( -4576, -6704, -61 ) );
+		scripts\zm\_gametype_setup::register_perk_struct( "specialty_scavenger", "zombie_vending_tombstone", ( 0, 90, 0 ), ( -6496, -7691, 0 ) );
+		scripts\zm\_gametype_setup::register_perk_struct( "specialty_weapupgrade", "p6_anim_zm_buildable_pap_on", ( 0, 175, 0 ), ( -6351, -7778, 227 ) );
+		scripts\zm\_gametype_setup::register_perk_struct( "specialty_quickrevive", "zombie_vending_quickrevive", ( 0, 270, 0 ), ( -4170 - 12.5, -7610, -61 ) );
+		scripts\zm\_gametype_setup::register_perk_struct( "specialty_fastreload", "zombie_vending_sleight", ( 0, 270, 0 ), ( -5470, -7859.5, 0 ) );
 	}
-
-	// Players spawn in the garage
-	register_map_initial_spawnpoint( ( -4290.99, -7583.55, -62.699 ), ( 0, -177.244, 0 ) );
-	register_map_initial_spawnpoint( ( -4290.95, -7679.21, -60.8681 ), ( 0, 179.015, 0 ) );
-	register_map_initial_spawnpoint( ( -4292.12, -7782.84, -62.726 ), ( 0, 176.477, 0 ) );
-	register_map_initial_spawnpoint( ( -4292.43, -7872.34, -62.875 ), ( 0, 176.477, 0 ) );
-	register_map_initial_spawnpoint( ( -4685.57, -7904.69, -62.875 ), ( 0, 1.68447, 0 ) );
-	register_map_initial_spawnpoint( ( -4694.29, -7786.72, -55.6662 ), ( 0, 1.68447, 0 ) );
-	register_map_initial_spawnpoint( ( -4707.08, -7671.75, -57.9624 ), ( 0, 1.68447, 0 ) );
-	register_map_initial_spawnpoint( ( -4691.18, -7588.58, -57.875 ), ( 0, 1.68447, 0 ) );
 	/*
 	//OLd spawnpoints
 	coordinates = array( ( -3991, -7317, -63 ), ( -4231, -7395, -60 ), ( -4127, -6757, -54 ), ( -4465, -7346, -58 ),
@@ -36,35 +24,21 @@ struct_init()
 	angles = array( ( 0, 161, 0 ), ( 0, 120, 0 ), ( 0, 217, 0 ), ( 0, 173, 0 ), ( 0, -106, 0 ), ( 0, -46, 0 ), ( 0, 51, 0 ), ( 0, 99, 0 ) );
 	*/
 	
-	gameObjects = getentarray( "script_model", "classname" );
-	foreach ( object in gameObjects )
-	{
-		if ( isDefined( object.script_gameobjectname ) && object.script_gameobjectname == "zcleansed zturned" )
-		{
-			object.script_gameobjectname = "zstandard zgrief zcleansed zturned";
-		}
-	}
-	
-	diner_hatch = getent( "diner_hatch", "targetname" );
-	diner_hatch.script_gameobjectname = "zclassic zstandard zgrief";
-	diner_hatch_mantle = getent( "diner_hatch_mantle", "targetname" );
-	diner_hatch_mantle.script_gameobjectname = "zclassic zstandard zgrief";
-	gameObjects = getentarray( "script_model", "classname" );
-	foreach ( object in gameObjects )
-	{
-		if ( isDefined( object.script_gameobjectname ) && object.script_gameobjectname == "zcleansed zturned" )
-		{
-			object.script_gameobjectname = "zstandard zgrief zcleansed zturned";
-		}
-	} 
+	// Players spawn in the garage
+	coordinates = array( (-4290.99, -7583.55, -62.699), (-4290.95, -7679.21, -60.8681), (-4292.12, -7782.84, -62.726), (-4292.43, -7872.34, -62.875),
+					 	 (-4685.57, -7904.69, -62.875), (-4694.29, -7786.72, -55.6662), (-4707.08, -7671.75, -57.9624), (-4691.18, -7588.58, -57.875) );
+	angles = array( (0, -177.244, 0), (0, 179.015, 0), (0, 176.477, 0), (0, 176.477, 0), (0, 1.68447, 0), (0, 1.68447, 0), (0, 1.68447, 0), (0, 1.68447, 0) );
 
-	door_ents = getentarray( "zombie_door", "targetname" );
-	foreach ( door in door_ents )
+	for ( i = 0; i < coordinates.size; i++ )
 	{
-		if ( isDefined( door.script_noteworthy ) && door.script_noteworthy == "electric_door" )
+		scripts\zm\_gametype_setup::register_map_initial_spawnpoint( coordinates[ i ], angles[ i ] );
+	}
+	gameObjects = getEntArray( "script_model", "classname" );
+	foreach ( object in gameObjects )
+	{
+		if ( isDefined( object.script_gameobjectname ) && object.script_gameobjectname == "zcleansed zturned" )
 		{
-			door.script_noteworthy = "electric_buyable_door";
-			door.zombie_cost = 1000;
+			object.script_gameobjectname = "zstandard zgrief zcleansed zturned";
 		}
 	}
 
@@ -78,22 +52,16 @@ struct_init()
 	linkNodes( a_nodes2[ 0 ], end_node );
 	linkNodes( start_node, end_node );
 	*/
-
-	level thread enable_zones();
-	diner_hatch_access();
-	init_barriers();
 }
 
 enable_zones()
 {
-	// zones = []; 
-	// zones[ 0 ] = "zone_gar";
-	// zones[ 1 ] = "zone_din";
-	// zones[ 2 ] = "zone_diner_roof";
-	flag_wait( "initial_blackscreen_passed" );
-	level thread maps\mp\zombies\_zm_zonemgr::enable_zone( "zone_gar" );
-	level thread maps\mp\zombies\_zm_zonemgr::enable_zone( "zone_din" );
-	level thread maps\mp\zombies\_zm_zonemgr::enable_zone( "zone_diner_roof" );
+	//level.location_zones_func = ::diner_adjacent_zones;
+	zones = []; 
+	zones[ 0 ] = "zone_gar";
+	zones[ 1 ] = "zone_din";
+	zones[ 2 ] = "zone_diner_roof";
+	return zones;
 }
 
 diner_adjacent_zones()
@@ -103,26 +71,35 @@ diner_adjacent_zones()
 
 precache()
 {
-	diner_roof_chest1_zbarrier = getEnt( "diner_roof_chest1_zbarrier", "script_noteworthy" );
-	collision = spawn( "script_model", diner_roof_chest1_zbarrier.origin );
-	collision.angles = diner_roof_chest1_zbarrier.angles;
+	normalChests = getstructarray( "treasure_chest_use", "targetname" );
+	start_chest_zbarrier = getEnt( "depot_chest_zbarrier", "script_noteworthy" );
+	start_chest_zbarrier.origin = ( -5708, -7968, 232 );
+	start_chest_zbarrier.angles = ( 0, 1, 0 );
+	start_chest = spawnStruct();
+	start_chest.origin = ( -5708, -7968, 232 );
+	start_chest.angles = ( 0, 1, 0 );
+	start_chest.script_noteworthy = "depot_chest";
+	start_chest.zombie_cost = 950;
+	collision = spawn( "script_model", start_chest_zbarrier.origin );
+	collision.angles = start_chest_zbarrier.angles;
 	collision setmodel( "collision_clip_32x32x128" );
-	collision = spawn( "script_model", diner_roof_chest1_zbarrier.origin - ( 32, 0, 0 ) );
-	collision.angles = diner_roof_chest1_zbarrier.angles;
+	collision = spawn( "script_model", start_chest_zbarrier.origin - ( 32, 0, 0 ) );
+	collision.angles = start_chest_zbarrier.angles;
 	collision setmodel( "collision_clip_32x32x128" );
-	collision = spawn( "script_model", diner_roof_chest1_zbarrier.origin + ( 32, 0, 0 ) );
-	collision.angles = diner_roof_chest1_zbarrier.angles;
+	collision = spawn( "script_model", start_chest_zbarrier.origin + ( 32, 0, 0 ) );
+	collision.angles = start_chest_zbarrier.angles;
 	collision setmodel( "collision_clip_32x32x128" );
-	
 	level.chests = [];
-	level.chests[ 0 ] = getstruct( "start_chest", "script_noteworthy" );
-	level.chests[ 1 ] = getstruct( "diner_roof_chest1", "script_noteworthy" );
+	level.chests[ 0 ] = normalChests[ 3 ];
+	level.chests[ 1 ] = start_chest;
 }
 
 diner_main()
 {
-	setup_standard_objects( "diner" );
-	maps\mp\zombies\_zm_magicbox::treasure_chest_init( random( array( "start_chest", "diner_roof_chest1" ) ) );
+	diner_hatch_access();
+	init_wallbuys();
+	init_barriers();
+	maps\mp\zombies\_zm_magicbox::treasure_chest_init( random( array( "start_chest", "depot_chest" ) ) );
 	scripts\zm\zm_transit\locs\location_common::common_init();
 }
 
@@ -141,11 +118,22 @@ diner_hatch_access()
 	diner_hatch show();
 	diner_hatch_col delete();
 	diner_hatch_mantle.origin = diner_hatch_mantle.start_origin;
+	//level maps\mp\zombies\_zm_buildables::track_placed_buildables( "dinerhatch" );
+}
+
+init_wallbuys()
+{
+	scripts\zm\_gametype_setup::wallbuy( "m14_zm", "m14", "weapon_upgrade", ( -4183.74 + 12.5, -7742.21, 0 ) , ( 0, 90, 0 ) );
+	scripts\zm\_gametype_setup::wallbuy( "rottweil72_zm", "olympia", "weapon_upgrade", ( -4979.03, -7831.74 + 12.5, 0 ), ( 0, 180, 0 ) );
+	scripts\zm\_gametype_setup::wallbuy( "claymore_zm", "claymore", "claymore_purchase", ( -4552.46 - 12.5, -7534.89, -15 ), ( 0, 270, 0 ) );
+	scripts\zm\_gametype_setup::wallbuy( "m16_zm", "m16", "weapon_upgrade", ( -3578, -7181, 0 ), ( 0, 180, 0 ) );
+	scripts\zm\_gametype_setup::wallbuy( "mp5k_zm", "mp5", "weapon_upgrade", ( -5489, -7982.7, 62 ), ( 0, 0, 0 ) );
+	scripts\zm\_gametype_setup::wallbuy( "tazer_knuckles_zm", "tazer_knuckles", "tazer_upgrade", ( -6399.2, -7938.5, 207.25 ), ( 0, 270, 0 ) );
 }
 
 init_barriers()
 {
-	precachemodel( "zm_collision_transit_diner_survival" );
+	precacheModel( "zm_collision_transit_diner_survival" );
 	collision = spawn( "script_model", ( -5000, -6700, 0 ), 1 );
 	collision setmodel( "zm_collision_transit_diner_survival" );
 }
